@@ -8,8 +8,12 @@
       <v-spacer></v-spacer>
       <v-btn text>
         <span class="mr-2">Do nothing</span>
+        <v-icon>mdi-diving-helmet</v-icon>
       </v-btn>
     </v-app-bar>
+    <v-content class="container">
+      <router-view />
+    </v-content>
 
     <v-content></v-content>
   </v-app>
@@ -18,7 +22,6 @@
 <script>
 export default {
   name: "App",
-  components: {},
   data: () => ({
     //
   })
