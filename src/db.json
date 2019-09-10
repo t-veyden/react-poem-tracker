@@ -1,0 +1,60 @@
+{
+    "poems": [
+      {
+        "id": "asdasd",
+        "author": "robert frost",
+        "poems": [
+          {
+            "id": "1",
+            "title": "fire and ice",
+            "text": [
+              "Some say the world will end in fire,",
+              "Some say in ice.",
+              "From what I've tasted of desire",
+              "I hold with those who favor fire.",
+              "But if it had to perish twice,",
+              "I think I know enough of hate",
+              "To say that for destruction ice",
+              "Is also great",
+              "And would suffice."
+            ],
+            "status": {
+              "learned": true
+            }
+          },
+          {
+            "id": "2",
+            "title": "***",
+            "text": ["smth smth smth", "smth smth else"],
+            "status": {
+              "learned": false,
+              "favourite": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "cvxcvxc",
+        "author": "nobody",
+        "poems": [
+          {
+            "id": "1",
+            "title": "cats",
+            "text": ["cats are everywhere", "descending"],
+            "status": {
+              "learned": false
+            }
+          },
+          {
+            "id": "2",
+            "title": "silence",
+            "text": ["...", ".."],
+            "status": {
+              "learned": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
