@@ -11,8 +11,13 @@
         <v-icon>mdi-diving-helmet</v-icon>
       </v-btn>
     </v-app-bar>
+
     <v-content class="container">
-      <router-view />
+      <div class="temp">
+        <v-btn text><router-link to="/poem/:id">Single Poem</router-link></v-btn>
+        <v-btn text><router-link to="/about">Smth</router-link></v-btn>
+      </div>
+      <router-view/>
     </v-content>
 
     <v-content></v-content>
@@ -20,10 +25,10 @@
 </template>
 
 <script>
-export default {
-  name: "App",
-  data: () => ({
-    //
-  })
-};
+  export default {
+    name: "App",
+    data: () => ({
+      //
+    })
+  };
 </script>
