@@ -6,10 +6,10 @@
         <span v-for="(line, idx) in poemData.text" :key="idx">{{line}}</span>
       </v-card-text>
       <v-card-actions class="pl-12">
-        <v-btn icon @click="markCompleted(poemData.id)">
-          <v-icon>mdi-check</v-icon>
+        <v-btn icon @click="toggleCompletion">
+          <v-icon>{{icon[poemData.status]}}</v-icon>
         </v-btn>
-        <v-btn icon @click="ejectPoem(poemData.id)">
+        <v-btn icon v-if="isInProgress" @click="ejectPoem">
           <v-icon>mdi-eject</v-icon>
         </v-btn>
       </v-card-actions>
@@ -18,32 +18,54 @@
 </template>
 
 <script>
-  export default {
-    name: "Poem",
+export default {
+  name: "Poem",
 
-    props: {
-      poemData: Object
+  data() {
+    return {
+      icon: {
+        pending: "mdi-check",
+        completed: "mdi-close",
+        current: "mdi-check"
+        // this is horrible, change it
+      }
+    };
+  },
+
+  props: {
+    poemData: Object
+  },
+
+  computed: {
+    isInProgress() {
+      return this.poemData.status === "current";
     },
 
-    methods: {
-      markCompleted(id) {
-        // emit completed
-        console.log(id);
-      },
-
-      ejectPoem(id) {
-        // emit ejected
-        console.log(id);
+    completionStatus() {
+      switch (this.poemData.status) {
+        case "completed":
+          return "pending";
+        case "pending":
+          return "completed";
       }
     }
-  }
+  },
 
+  methods: {
+    toggleCompletion() {
+      this.poemData.status = this.completionStatus;
+    },
+
+    ejectPoem() {
+      this.poemData.status = "pending";
+    }
+  }
+};
 </script>
 
 <style scoped>
-  .v-card__text {
-    display: flex;
-    flex-direction: column;
-  }
-
+.v-card__text {
+  display: flex;
+  flex-direction: column;
+}
 </style>
