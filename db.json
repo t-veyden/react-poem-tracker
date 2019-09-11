@@ -1,5 +1,5 @@
 {
-  "current": [
+  "poems": [
     {
       "id": "asdasd",
       "author": "robert frost",
@@ -30,9 +30,7 @@
       "title": "",
       "text": [],
       "status": "current"
-    }
-  ],
-  "purgatory": [
+    },
     {
       "id": "2sdfwe",
       "author": "someone",
@@ -62,9 +60,27 @@
         ".."
       ],
       "status": "pending"
-    }
-  ],
-  "completed": [
+    },
+    {
+      "id": "sdfsdfssddsd",
+      "author": "nobody",
+      "title": "suddenly",
+      "text": [
+        "suddenly",
+        "there's another index"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sdfs4545ssddsd",
+      "author": "nobody",
+      "title": "more suddenly",
+      "text": [
+        "even more suddenly",
+        "there is one index more"
+      ],
+      "status": "pending"
+    },
     {
       "id": "2sdfwesdsd",
       "author": "someone2",

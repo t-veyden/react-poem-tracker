@@ -4,17 +4,17 @@
     <t-section sectionTitle="In Progress">
       <div style="width:400px">
         <v-carousel hide-delimiters show-arrows-on-hover height="350">
-          <v-carousel-item v-for="(poem, idx) in poems" :key="idx">
+          <v-carousel-item v-for="(poem, idx) in current" :key="idx">
             <t-poem :poemData="poem"/>
           </v-carousel-item>
         </v-carousel>
       </div>
     </t-section>
     <t-section sectionTitle="Purgatory" typeOfBar>
-      <t-bars type="purgatory"/>
+      <t-bars type="purgatory" :poems="pending"/>
     </t-section>
     <t-section sectionTitle="Completed" typeOfBar>
-      <t-bars type="completed"/>
+      <t-bars type="completed" :poems="completed"/>
     </t-section>
   </div>
 </template>
@@ -33,7 +33,10 @@
 
     data() {
       return {
-        poems: []
+        current: [],
+        pending: [],
+        completed: [],
+        statuses: ['current', 'pending', 'completed']
       }
     },
 
@@ -43,10 +46,9 @@
 
     methods: {
       getData() {
-        this.$http.get('http://localhost:3000/purgatory')
+        this.$http.get('http://localhost:3000/poems')
           .then(response => {
-            this.poems = response.body
-            // console.log(response.body);
+            this.statuses.forEach(status => this[status] = response.body.filter(el => el.status === status));
           })
       }
     }
