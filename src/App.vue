@@ -14,10 +14,14 @@
 
     <v-content class="container">
       <div class="temp">
-        <v-btn text><router-link to="/poem/:id">Single Poem</router-link></v-btn>
-        <v-btn text><router-link to="/about">Smth</router-link></v-btn>
+        <v-btn text>
+          <router-link to="/poem/:id">Single Poem</router-link>
+        </v-btn>
+        <v-btn text>
+          <router-link to="/">Home</router-link>
+        </v-btn>
       </div>
-      <router-view/>
+      <router-view />
     </v-content>
 
     <v-content></v-content>
@@ -25,10 +29,10 @@
 </template>
 
 <script>
-  export default {
-    name: "App",
-    data: () => ({
-      //
-    })
-  };
+export default {
+  name: "App",
+  data: () => ({
+    //
+  })
+};
 </script>
