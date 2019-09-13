@@ -17,97 +17,168 @@
       ],
       "status": "current",
       "completed": false,
-      "in_progress": true
+      "in_progress": true,
+      "lang": "english"
     },
     {
       "id": "skdksjd",
-      "author": "",
-      "title": "",
-      "text": [],
+      "author": "shakespeare",
+      "title": "sonnet 130",
+      "text": [
+        "My mistress' eyes are nothing like the sun;",
+        "Coral is far more red than her lips' red;",
+        "If snow be white, why then her breasts are dun;",
+        "If hairs be wires, black wires grow on her head.",
+        "I have seen roses damask'd, red and white,",
+        "But no such roses see I in her cheeks;",
+        "And in some perfumes is there more delight",
+        "Than in the breath that from my mistress reeks.",
+        "I love to hear her speak, yet well I know",
+        "That music hath a far more pleasing sound;",
+        "I grant I never saw a goddess go;",
+        "My mistress, when she walks, treads on the ground:",
+        "And yet, by heaven, I think my love as rare",
+        "As any she belied with false compare."
+      ],
       "status": "current",
       "completed": false,
-      "in_progress": true
+      "in_progress": true,
+      "lang": "english"
     },
     {
-      "id": "skdksjd",
-      "author": "",
-      "title": "",
-      "text": [],
+      "id": "skdksjdfsdf",
+      "author": "pablo neruda",
+      "title": "soneto xvii",
+      "text": [
+        "No te amo como si fueras rosa de sal, topacio",
+        "o flecha de claveles que propagan el fuego:",
+        "te amo como se aman ciertas cosas oscuras,",
+        "secretamente, entre la sombra y el alma.",
+        "",
+        "Te amo como la planta que no florece y lleva",
+        "dentro de sí, escondida, la luz de aquellas flores,",
+        "y gracias a tu amor vive oscuro en mi cuerpo",
+        "el apretado aroma que ascendió de la tierra.",
+        "",
+        "Te amo sin saber cómo, ni cuándo, ni de dónde,",
+        "te amo directamente sin problemas ni orgullo:",
+        "así te amo porque no sé amar de otra manera,",
+        "",
+        "sino así de este modo en que no soy ni eres,",
+        "tan cerca que tu mano sobre mi pecho es mía,",
+        "tan cerca que se cierran tus ojos con mi sueño."
+      ],
       "status": "current",
       "completed": false,
-      "in_progress": true
+      "in_progress": true,
+      "lang": "spanish"
     },
     {
       "id": "2sdfwe",
       "author": "someone",
       "title": "***",
-      "text": ["smth smth smth", "smth smth else"],
+      "text": [
+        "smth smth smth",
+        "smth smth else"
+      ],
       "status": "pending",
       "completed": false,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "english"
     },
     {
       "id": "cvxcvxc",
       "author": "nobody",
       "title": "cats",
-      "text": ["cats are everywhere", "descending"],
+      "text": [
+        "cats are everywhere",
+        "descending"
+      ],
       "status": "pending",
       "completed": false,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "english"
     },
     {
       "id": "sdfsdfs",
       "author": "nobody",
       "title": "silence",
-      "text": ["...", ".."],
+      "text": [
+        "...",
+        ".."
+      ],
       "status": "pending",
       "completed": false,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "german"
     },
     {
       "id": "sdfsdfssddsd",
       "author": "nobody",
       "title": "suddenly",
-      "text": ["suddenly", "there's another index"],
+      "text": [
+        "suddenly",
+        "there's another index"
+      ],
       "status": "pending",
       "completed": false,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "english"
     },
     {
       "id": "sdfs4545ssddsd",
       "author": "nobody",
       "title": "more suddenly",
-      "text": ["even more suddenly", "there is one index more"],
+      "text": [
+        "even more suddenly",
+        "there is one index more"
+      ],
       "status": "pending",
       "completed": false,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "english"
     },
     {
       "id": "2sdfwesdsd",
       "author": "someone2",
       "title": "***",
-      "text": ["smth smth smth", "smth smth else", "and also something else"],
+      "text": [
+        "smth smth smth",
+        "smth smth else",
+        "and also something else"
+      ],
       "status": "completed",
       "completed": true,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "english"
     },
     {
       "id": "cvxcvxcasdad",
       "author": "nobody2",
       "title": "more cats",
-      "text": ["cats are everywhere", "everywhere", "descending"],
+      "text": [
+        "cats are everywhere",
+        "everywhere",
+        "descending"
+      ],
       "status": "completed",
       "completed": true,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "english"
     },
     {
       "id": "sdfsdfswewee",
       "author": "nobody2",
       "title": "more silence",
-      "text": ["...", "...", ".."],
+      "text": [
+        "...",
+        "...",
+        ".."
+      ],
       "status": "completed",
       "completed": true,
-      "in_progress": false
+      "in_progress": false,
+      "lang": "french"
     }
   ]
 }
