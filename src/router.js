@@ -27,6 +27,11 @@ export default new Router({
       component: () => import('./views/Completed.vue')
     },
     {
+      path: '/add',
+      name: 'add',
+      component: () => import('./views/AddPoem.vue')
+    },
+    {
       path: '/poem/:id',
       name: 'poem',
       component: () => import('./views/Poem.vue')
