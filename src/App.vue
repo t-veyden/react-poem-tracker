@@ -20,6 +20,9 @@
         <v-btn text>
           <router-link to="/purgatory">Purgatory</router-link>
         </v-btn>
+        <v-btn text>
+          <router-link to="/completed">Completed</router-link>
+        </v-btn>
       </div>
       <router-view />
     </v-content>

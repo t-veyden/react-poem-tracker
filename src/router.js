@@ -22,6 +22,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Purgatory.vue')
     },
     {
+      path: '/completed',
+      name: 'completed',
+      component: () => import('./views/Completed.vue')
+    },
+    {
       path: '/poem/:id',
       name: 'poem',
       component: () => import('./views/Poem.vue')
