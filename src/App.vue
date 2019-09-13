@@ -15,9 +15,6 @@
     <v-content class="container">
       <div class="temp">
         <v-btn text>
-          <router-link to="/poem/:id">Single Poem</router-link>
-        </v-btn>
-        <v-btn text>
           <router-link to="/">Home</router-link>
         </v-btn>
         <v-btn text>
