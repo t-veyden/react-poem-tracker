@@ -220,5 +220,12 @@
       "in_progress": false,
       "lang": "english"
     }
+  ],
+  "users": [
+    {
+      "id": "sdskllj",
+      "email": "sam@gmail.com",
+      "password": "skyshipboot"
+    }
   ]
 }

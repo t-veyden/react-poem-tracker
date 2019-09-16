@@ -41,6 +41,11 @@ export default new Router({
       path: '/poem/:id',
       name: 'poem',
       component: () => import('./views/Poem.vue')
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: () => import('./views/SignIn.vue')
     }
   ]
 })
