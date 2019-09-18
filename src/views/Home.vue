@@ -17,7 +17,9 @@
       <t-bars type="completed" :poems="completed"/>
     </t-section>
 
-    <br><hr><br>
+    <br>
+    <hr>
+    <br>
     <h3>widget</h3>
     <aside>
       <t-widget :poems="poems"/>
@@ -26,6 +28,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import TSection from '../components/Section'
   import TBars from '../components/Bars'
   import TPoem from '../components/Poem'
@@ -41,7 +44,6 @@
 
     data() {
       return {
-        poems: [],
         current: [],
         pending: [],
         completed: [],
@@ -53,13 +55,14 @@
       this.getData()
     },
 
+    computed: {
+      ...mapState('poems', ['poems'])
+    },
+
     methods: {
       getData() {
-        this.$http.get('http://localhost:3000/poems')
-          .then(response => {
-            this.poems = response.body;
-            this.statuses.forEach(status => this[status] = response.body.filter(el => el.status === status));
-          })
+        this.$store.dispatch('poems/getPoemsData')
+          .then(() => this.statuses.forEach(status => this[status] = this.poems.filter(el => el.status === status)))
       }
     }
   }

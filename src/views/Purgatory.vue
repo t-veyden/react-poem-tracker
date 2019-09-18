@@ -20,25 +20,30 @@
     </div>
     <hr>
 
-    <v-btn text @click="getRandomPoem">I feel lucky <v-icon right>mdi-dice-3</v-icon></v-btn>
+    <v-btn text @click="getRandomPoem">I feel lucky
+      <v-icon right>mdi-dice-3</v-icon>
+    </v-btn>
     <v-btn text v-show="luckyEnabled" @click="showAll">full list, please</v-btn>
     <hr>
 
     <ul>
       <li class="purgatory__item" v-for="poem in sortedPoems" :key="poem.id">
-        <router-link :to="`/poem/${poem.id}`">{{poem.title}}</router-link><span>&nbsp;by {{poem.author}}</span>
+        <router-link :to="`/poem/${poem.id}`">{{poem.title}}</router-link>
+        <span>&nbsp;by {{poem.author}}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
   export default {
     name: "Purgatory",
 
     data() {
       return {
-        poems: [],
+        // poems: [],
         sortedPoems: [],
         filters: [
           {id: 'short', label: 'short ones'},
@@ -54,12 +59,23 @@
       this.getData()
     },
 
+    computed: {
+      ...mapState('poems', ['poems'])
+    },
+
     methods: {
+      // getData() {
+      //   this.$http.get('http://localhost:3000/poems')
+      //     .then(response => {
+      //       this.poems = response.body.filter(el => el.status === 'pending');
+      //       this.sortedPoems = response.body.filter(el => el.status === 'pending');
+      //     })
+      // },
+
       getData() {
-        this.$http.get('http://localhost:3000/poems')
-          .then(response => {
-            this.poems = response.body.filter(el => el.status === 'pending');
-            this.sortedPoems = response.body.filter(el => el.status === 'pending');
+        this.$store.dispatch('poems/getPoemsData')
+          .then(() => {
+            this.sortedPoems = this.poems.filter(el => el.status === 'pending')
           })
       },
 
