@@ -4,12 +4,27 @@ const poems = {
   namespaced: true,
 
   state: {
-    poems: []
+    poems: [],
+    isAdded: false
+  },
+
+  getters: {
+    newPoemStatus(state) {
+      return state.isAdded;
+    }
   },
 
   mutations: {
     getPoemsData(state, poems) {
       state.poems = poems;
+    },
+
+    addPoem(state) {
+      state.isAdded = true;
+    },
+
+    clearMessage(state) {
+      state.isAdded = false;
     }
   },
 
@@ -22,6 +37,18 @@ const poems = {
         .catch(error => {
           console.log(error.statusText)
         })
+    },
+
+    addPoem({commit}, payload) {
+      Vue.http.post('http://localhost:3000/poems', payload)
+      .then(response => response.json())
+      .then(response => {
+        // console.log(response)
+        commit('addPoem');
+        setTimeout(() => {
+          commit('clearMessage');
+        }, 3000);
+      })
     }
   }
 }
