@@ -4,7 +4,18 @@
     <v-form>
       <v-text-field v-model="newPoem.title" label="Title"/>
       <v-text-field v-model="newPoem.author" label="Author" required/>
-      <v-autocomplete :items="['English', 'French', 'Spanish']" label="Language" v-model="newPoem.lang"/>
+      <v-autocomplete
+        :items="langs"
+        label="Language"
+        v-model="newPoem.lang"
+        dense hide-selected
+      />
+      <v-autocomplete
+        :items="completionStates"
+        label="Status"
+        v-model="status"
+        dense hide-selected
+      />
       <!-- but if i want to add another one? -->
 
       <wysiwyg v-model="newPoem.text"/>
@@ -29,11 +40,13 @@
           author: '',
           title: '',
           text: '',
-          status: '',
           completed: false,
           in_progress: false,
           lang: 'English'
-        }
+        },
+        status: 'pending',
+        completionStates: ['current', 'pending', 'completed'],
+        langs: ['English', 'French', 'Spanish']
       }
     },
 
@@ -47,11 +60,16 @@
     methods: {
       preparePoem() {
         if (!this.newPoem.title) this.newPoem.title = '***';
+        if(this.status === 'current') {
+          this.newPoem.in_progress = true
+        } else if(this.status === 'completed') {
+          this.newPoem.completed = true;
+        }
       },
 
       submitPoem() {
         this.preparePoem();
-        this.$store.dispatch('poems/addPoem', this.newPoem)
+        this.$store.dispatch('poems/addPoem', this.newPoem);
         this.clearForm();
       },
 
@@ -60,11 +78,12 @@
           author: '',
           title: '',
           text: '',
-          status: '',
           completed: false,
           in_progress: false,
           lang: 'English'
-        }
+        };
+
+        this.status = 'pending';
       }
     }
   }
