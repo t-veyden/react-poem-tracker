@@ -14,15 +14,15 @@ const poems = {
     },
 
     completedPoems(state) {
-      return state.poems.filter(poem => poem.status === 'completed');
+      return state.poems.filter(poem => !poem.in_progress && poem.completed);
     },
 
     pendingPoems(state) {
-      return state.poems.filter(poem => poem.status === 'pending');
+      return state.poems.filter(poem => !poem.in_progress && !poem.completed);
     },
 
     currentPoems(state) {
-      return state.poems.filter(poem => poem.status === 'current');
+      return state.poems.filter(poem => poem.in_progress && !poem.completed);
     }
   },
 

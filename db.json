@@ -15,7 +15,6 @@
         "Is also great",
         "And would suffice."
       ],
-      "status": "current",
       "completed": false,
       "in_progress": true,
       "lang": "english"
@@ -40,7 +39,6 @@
         "And yet, by heaven, I think my love as rare",
         "As any she belied with false compare."
       ],
-      "status": "current",
       "completed": false,
       "in_progress": true,
       "lang": "english"
@@ -68,7 +66,6 @@
         "tan cerca que tu mano sobre mi pecho es mía,",
         "tan cerca que se cierran tus ojos con mi sueño."
       ],
-      "status": "current",
       "completed": false,
       "in_progress": true,
       "lang": "spanish"
@@ -81,7 +78,6 @@
         "smth smth smth",
         "smth smth else"
       ],
-      "status": "pending",
       "completed": false,
       "in_progress": false,
       "lang": "english"
@@ -94,7 +90,6 @@
         "cats are everywhere",
         "descending"
       ],
-      "status": "pending",
       "completed": false,
       "in_progress": false,
       "lang": "english"
@@ -107,7 +102,6 @@
         "...",
         ".."
       ],
-      "status": "pending",
       "completed": false,
       "in_progress": false,
       "lang": "german"
@@ -120,7 +114,6 @@
         "suddenly",
         "there's another index"
       ],
-      "status": "pending",
       "completed": false,
       "in_progress": false,
       "lang": "english"
@@ -133,7 +126,6 @@
         "even more suddenly",
         "there is one index more"
       ],
-      "status": "pending",
       "completed": false,
       "in_progress": false,
       "lang": "english"
@@ -147,7 +139,6 @@
         "smth smth else",
         "and also something else"
       ],
-      "status": "completed",
       "completed": true,
       "in_progress": false,
       "lang": "english"
@@ -161,7 +152,6 @@
         "everywhere",
         "descending"
       ],
-      "status": "completed",
       "completed": true,
       "in_progress": false,
       "lang": "english"
@@ -175,7 +165,6 @@
         "...",
         ".."
       ],
-      "status": "completed",
       "completed": true,
       "in_progress": false,
       "lang": "french"
@@ -203,7 +192,6 @@
         "",
         "i carry your heart(i carry it in my heart)"
       ],
-      "status": "completed",
       "completed": true,
       "in_progress": false,
       "lang": "english"
@@ -215,7 +203,6 @@
       "text": [
         "line"
       ],
-      "status": "completed",
       "completed": true,
       "in_progress": false,
       "lang": "english"
