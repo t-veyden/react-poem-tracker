@@ -4,17 +4,17 @@
     <t-section sectionTitle="In Progress">
       <div style="width:400px">
         <v-carousel hide-delimiters show-arrows-on-hover height="350">
-          <v-carousel-item v-for="(poem, idx) in current" :key="idx">
+          <v-carousel-item v-for="(poem, idx) in currentPoems" :key="idx">
             <t-poem :poemData="poem"/>
           </v-carousel-item>
         </v-carousel>
       </div>
     </t-section>
     <t-section sectionTitle="Purgatory" typeOfBar>
-      <t-bars type="purgatory" :poems="pending"/>
+      <t-bars type="purgatory" :poems="pendingPoems"/>
     </t-section>
     <t-section sectionTitle="Completed" typeOfBar>
-      <t-bars type="completed" :poems="completed"/>
+      <t-bars type="completed" :poems="completedPoems"/>
     </t-section>
 
     <br>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
+  import {mapState, mapGetters} from 'vuex';
   import TSection from '../components/Section'
   import TBars from '../components/Bars'
   import TPoem from '../components/Poem'
@@ -44,26 +44,17 @@
 
     data() {
       return {
-        current: [],
-        pending: [],
-        completed: [],
-        statuses: ['current', 'pending', 'completed']
+        //
       }
     },
 
     created() {
-      this.getData()
+      this.$store.dispatch('poems/getPoemsData');
     },
 
     computed: {
-      ...mapState('poems', ['poems'])
-    },
-
-    methods: {
-      getData() {
-        this.$store.dispatch('poems/getPoemsData')
-          .then(() => this.statuses.forEach(status => this[status] = this.poems.filter(el => el.status === status)))
-      }
+      ...mapState('poems', ['poems']),
+      ...mapGetters('poems', ['pendingPoems', 'currentPoems', 'completedPoems'])
     }
   }
 </script>

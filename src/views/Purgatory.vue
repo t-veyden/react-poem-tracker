@@ -13,7 +13,7 @@
       <p>with a flavour:</p>
       <ul>
         <li v-for="filter in filters" :key="filter.id">
-          <label :for="filter.id">{{filter.label}}&nbsp;</label>
+          <label :for="filter.id">{{ filter.label }}&nbsp;</label>
           <input type="checkbox" :id="filter.id">
         </li>
       </ul>
@@ -28,22 +28,21 @@
 
     <ul>
       <li class="purgatory__item" v-for="poem in sortedPoems" :key="poem.id">
-        <router-link :to="`/poem/${poem.id}`">{{poem.title}}</router-link>
-        <span>&nbsp;by {{poem.author}}</span>
+        <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
+        <span>&nbsp;by {{ poem.author }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
+  import {mapGetters} from 'vuex';
 
   export default {
     name: "Purgatory",
 
     data() {
       return {
-        // poems: [],
         sortedPoems: [],
         filters: [
           {id: 'short', label: 'short ones'},
@@ -56,36 +55,23 @@
     },
 
     created() {
-      this.getData()
+      this.$store.dispatch('poems/getPoemsData');
+      this.sortedPoems = this.pendingPoems;
     },
 
     computed: {
-      ...mapState('poems', ['poems'])
+      ...mapGetters('poems', ['pendingPoems'])
     },
 
     methods: {
-      // getData() {
-      //   this.$http.get('http://localhost:3000/poems')
-      //     .then(response => {
-      //       this.poems = response.body.filter(el => el.status === 'pending');
-      //       this.sortedPoems = response.body.filter(el => el.status === 'pending');
-      //     })
-      // },
-
-      getData() {
-        this.$store.dispatch('poems/getPoemsData')
-          .then(() => {
-            this.sortedPoems = this.poems.filter(el => el.status === 'pending')
-          })
-      },
 
       getRandomPoem() {
-        this.sortedPoems = [this.poems[Math.floor(Math.random() * this.poems.length)]];
+        this.sortedPoems = [this.pendingPoems[Math.floor(Math.random() * this.pendingPoems.length)]];
         this.luckyEnabled = true;
       },
 
       showAll() {
-        this.sortedPoems = this.poems;
+        this.sortedPoems = this.pendingPoems;
         this.luckyEnabled = false;
       }
     }

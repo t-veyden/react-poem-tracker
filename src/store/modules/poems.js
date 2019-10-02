@@ -11,6 +11,18 @@ const poems = {
   getters: {
     newPoemStatus(state) {
       return state.isAdded;
+    },
+
+    completedPoems(state) {
+      return state.poems.filter(poem => poem.status === 'completed');
+    },
+
+    pendingPoems(state) {
+      return state.poems.filter(poem => poem.status === 'pending');
+    },
+
+    currentPoems(state) {
+      return state.poems.filter(poem => poem.status === 'current');
     }
   },
 
