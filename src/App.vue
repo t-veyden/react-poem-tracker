@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar class="top-bar" app>
       <v-toolbar-title class="headline text-uppercase mr-2">
         <router-link class="home-link" to="/">
           <span>Poetry</span>
@@ -8,22 +8,35 @@
         </router-link>
       </v-toolbar-title>
 
-      <v-btn text><router-link class="btn-link" to="/purgatory">Purgatory</router-link></v-btn>
-      <v-btn text><router-link class="btn-link" to="/completed">Completed</router-link></v-btn>
-      <v-btn text><router-link class="btn-link" to="/add">Add New</router-link></v-btn>
-
-      <v-spacer></v-spacer>
       <v-btn text>
-        <span class="mr-2">Do nothing</span>
         <v-icon>mdi-diving-helmet</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-content class="container">
-      <router-view />
-    </v-content> 
+    <v-content>
+      <v-container fluid full-height>
+        <router-view />
+      </v-container>
+    </v-content>
 
-    <v-content></v-content>
+    <v-footer app>
+      <span>&copy; OneManBand 2019</span>
+    </v-footer>
+
+    <v-bottom-navigation app>
+      <v-btn icon text large class="mr-4">
+        <router-link class="btn-link" to="/purgatory">Purgatory</router-link>
+        <v-icon>mdi-fire</v-icon>
+      </v-btn>
+      <v-btn icon text large class="mr-4">
+        <router-link class="btn-link" to="/completed">Completed</router-link>
+        <v-icon>mdi-anchor</v-icon>
+      </v-btn>
+      <v-btn icon text large>
+        <router-link class="btn-link" to="/add">Add New</router-link>
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 
@@ -37,12 +50,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .home-link, 
-  .btn-link {
-    text-decoration: none;
-  }
+.home-link,
+.btn-link {
+  text-decoration: none;
+}
 
-  .home-link {
-    color: rgba(0, 0, 0, 0.87);
-  }
+.home-link {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.top-bar::v-deep .v-toolbar__content {
+  justify-content: space-between;
+}
 </style>

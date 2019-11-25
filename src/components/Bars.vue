@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div class="t-bar" v-for="poem in poemBars" :key="poem.id">
-      <div>
-        <router-link :to="`/poem/${poem.id}`">{{poem.title}}</router-link>
-        <span>||</span>
-        <small>{{poem.author}}</small>
-      </div>
-    </div>
-  </div>
+  <ul class="t-bars">
+    <li class="t-bar" v-for="poem in poemBars" :key="poem.id">
+      <router-link class="t-bar__link" :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
+      &nbsp;
+      <span class="t-bar__delimeter">..</span>
+      &nbsp;
+      <small class="t-bar__author">{{ poem.author }}</small>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -50,11 +50,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.t-bar {
+.t-bars {
+  margin: 0;
   padding: 10px;
+  list-style: none;
+  background-color: #fff;
+}
 
-  &:nth-child(odd) {
-    background-color: #ededed;
+.t-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  &__delimeter {
+    position: absolute;
+    left: 50%;
+  }
+
+  &__link {
+    color: #535251;
   }
 }
 </style>
