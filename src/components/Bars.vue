@@ -54,7 +54,6 @@ export default {
   margin: 0;
   padding: 10px;
   list-style: none;
-  background-color: #fff;
 }
 
 .t-bar {

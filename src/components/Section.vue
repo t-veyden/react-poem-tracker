@@ -23,6 +23,7 @@
 <style lang="scss" scoped>
   .section {
     margin-bottom: 25px;
+    background-color: #fff;
 
     &__title {
       margin-bottom: 5px;
