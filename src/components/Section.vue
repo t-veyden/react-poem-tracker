@@ -2,7 +2,7 @@
   <div class="section">
     <h2 class="section__title">{{sectionTitle}}</h2>
     <slot></slot>
-    <router-link :to="`/${sectionTitle}`" v-if="typeOfBar" class="section__link">see more</router-link>
+    <router-link :to="`/${sectionTitle}`" v-if="typeOfBar" class="section__link">the rest lies here</router-link>
   </div>
 </template>
 
