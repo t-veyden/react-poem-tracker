@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" ref="poemBox">
     <v-card min-width="300" min-height="300">
       <v-card-title>{{ poemData.title }}</v-card-title>
       <v-list-item-subtitle>{{ poemData.author }}</v-list-item-subtitle>
@@ -40,6 +40,10 @@ export default {
     poemData: Object
   },
 
+  mounted() {
+    this.getBoxHeight();
+  },
+
   computed: {
     isInProgress() {
       return this.poemData.status === "current";
@@ -56,6 +60,10 @@ export default {
   },
 
   methods: {
+    getBoxHeight() {
+      this.$emit('assignHeight', this.$refs.poemBox.clientHeight);
+    },
+
     toggleCompletion() {
       this.poemData.status = this.completionStatus;
     },
