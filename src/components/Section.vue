@@ -24,6 +24,7 @@
   .section {
     margin-bottom: 25px;
     background-color: #fff;
+    padding-bottom: 15px;
 
     &__title {
       margin-bottom: 5px;
@@ -31,16 +32,20 @@
       // font-weight: 300;
       text-align: center;
       // text-transform: uppercase;
-      opacity: 0.1;
+      color: #455a64;
+      opacity: 0.2;
     }
 
     &__link {
-      display: inline-block;
-      width: 100%;
-      margin-top: 10px;
+      background-color: #607d8b;
+      display: block;
+      width: 200px;
+      padding: 5px;
+      margin: 10px auto 0;
+      color: #fff;
       text-align: center;
       text-decoration: none;
-      color: #535251;
+      border-radius: 4px;
       cursor: pointer;
     }
   }
