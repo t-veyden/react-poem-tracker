@@ -3,27 +3,27 @@
     <h1 class="visually-hidden">Poetry Tracker home page</h1>
     <t-section sectionTitle="in progress">
       <v-card style="box-shadow: 0;" elevation="0">
-          <v-carousel 
-            :show-arrows="false" 
-            hide-delimiter-background 
-            light 
-            elevation="0"
-            :height="boxHeight" 
-            v-model="currIdx"
-          >
-            <v-carousel-item v-for="(poem, idx) in currentPoems" :key="idx">
-              <t-poem :poemData="poem" @assignHeight="updateHeight"/>
-            </v-carousel-item>
-          </v-carousel>
+        <v-carousel
+          :show-arrows="false"
+          hide-delimiter-background
+          light
+          elevation="0"
+          :height="boxHeight"
+          v-model="currIdx"
+        >
+          <v-carousel-item v-for="(poem, idx) in currentPoems" :key="idx">
+            <t-poem :poemData="poem" @assignHeight="updateHeight"/>
+          </v-carousel-item>
+        </v-carousel>
         </v-card>
     </t-section>
 
-      <t-section class="bar-section" sectionTitle="purgatory" typeOfBar>
-        <t-bars type="purgatory" :poems="pendingPoems"/>
-      </t-section>
-      <t-section class="bar-section" sectionTitle="completed" typeOfBar>
-        <t-bars type="completed" :poems="completedPoems"/>
-      </t-section>
+    <t-section class="bar-section" sectionTitle="purgatory" typeOfBar>
+      <t-bars type="purgatory" :poems="pendingPoems"/>
+    </t-section>
+    <t-section class="bar-section" sectionTitle="completed" typeOfBar>
+      <t-bars type="completed" :poems="completedPoems"/>
+    </t-section>
 
     <!-- <h3>widget</h3>
     <aside>
@@ -76,7 +76,7 @@
 </script>
 
 <style lang="scss" scoped>
- @import '../styles/style-heap.scss'; 
+ @import '../styles/style-heap.scss';
 
 .home::v-deep {
   .v-card {
