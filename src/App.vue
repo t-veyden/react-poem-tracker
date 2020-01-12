@@ -23,19 +23,19 @@
       <span>&copy; OneManBand 2019</span>
     </v-footer>
 
-    <v-bottom-navigation app>
-      <v-btn icon text large class="mr-4">
-        <router-link class="btn-link" to="/purgatory">Purgatory</router-link>
-        <v-icon>mdi-fire</v-icon>
-      </v-btn>
-      <v-btn icon text large class="mr-4">
-        <router-link class="btn-link" to="/completed">Completed</router-link>
-        <v-icon>mdi-anchor</v-icon>
-      </v-btn>
-      <v-btn icon text large>
-        <router-link class="btn-link" to="/add">Add New</router-link>
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
+    <v-bottom-navigation app class="bottom-nav">
+      <div class="bottom-nav__item mr-4">
+        <v-icon class="bottom-nav__icon">mdi-fire</v-icon>
+        <router-link class="bottom-nav__link" to="/purgatory">Purgatory</router-link>
+      </div>
+      <div class="bottom-nav__item mr-4">
+        <v-icon class="bottom-nav__icon">mdi-anchor</v-icon>
+        <router-link class="bottom-nav__link" to="/completed">Completed</router-link>
+      </div>
+      <div class="bottom-nav__item">
+        <v-icon class="bottom-nav__icon">mdi-plus</v-icon>
+        <router-link class="bottom-nav__link" to="/add">Add New</router-link>
+      </div>
     </v-bottom-navigation>
   </v-app>
 </template>
@@ -50,8 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-link,
-.btn-link {
+.home-link {
   text-decoration: none;
 }
 
@@ -61,5 +60,25 @@ export default {
 
 .top-bar::v-deep .v-toolbar__content {
   justify-content: space-between;
+}
+
+.bottom-nav {
+  &__item {
+    padding: 4px;
+    opacity: 0.7;
+  }
+
+  &__icon.v-icon {
+    display: block;
+    height: 28px;
+    width: 28px;
+    margin: 0 auto 2px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 12px;
+    text-decoration: none;
+  }
 }
 </style>
