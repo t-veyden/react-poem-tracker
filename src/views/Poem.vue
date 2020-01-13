@@ -2,7 +2,7 @@
   <div class="poem-view">
     <h1>This is a single poem page</h1>
     <t-poem :poemData="poem" />
-    <t-actions :id="id" class="pl-12" />
+    <t-actions :id="id" :q="poem.in_progress" :c="poem.completed" class="pl-12" />
   </div>
 </template>
 

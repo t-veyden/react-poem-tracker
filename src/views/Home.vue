@@ -13,6 +13,7 @@
         >
           <v-carousel-item v-for="(poem, idx) in currentPoems" :key="idx">
             <t-poem :poemData="poem" @assignHeight="updateHeight"/>
+            <t-actions :id="poem.id" :q="poem.in_progress" :c="poem.completed" class="pl-12" />
           </v-carousel-item>
         </v-carousel>
         </v-card>
@@ -37,12 +38,14 @@
   import TSection from '../components/Section'
   import TBars from '../components/Bars'
   import TPoem from '../components/Poem'
+  import TActions from "../components/PoemActions";
   import TWidget from '../components/Widget'
 
   export default {
     components: {
       TSection,
       TPoem,
+      TActions,
       TBars,
       TWidget
     },
@@ -63,7 +66,7 @@
       ...mapGetters('poems', ['pendingPoems', 'currentPoems', 'completedPoems']),
 
       boxHeight() {
-        return this.heights.length ? this.heights[this.currIdx] : '350';
+        return this.heights.length ? this.heights[this.currIdx] + 100 : '350';
       }
     },
 

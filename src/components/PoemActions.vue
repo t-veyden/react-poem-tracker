@@ -1,11 +1,11 @@
 <template>
   <v-card-actions>
-    <v-btn v-if="q !== null" @click="toggleQ">
-      <span v-if="!q">queue</span>
+    <v-btn v-if="isCurrent !== null" @click="toggleQ">
+      <span v-if="!isCurrent">queue</span>
       <span v-else>UNqueue</span>
     </v-btn>
     <v-btn @click="toggleCompletion">
-      <span v-if="!c">complete it</span>
+      <span v-if="!isDone">complete it</span>
       <span v-else>UNcomplete</span>
     </v-btn>
   </v-card-actions>
@@ -16,8 +16,8 @@ export default {
   name: "PoemActions",
   data() {
     return {
-      q: false,
-      c: false
+      isCurrent: false,
+      isDone: false
     };
   },
 
@@ -25,31 +25,44 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    q: {
+      type: Boolean || null,
+      required: true
+    },
+    c: {
+      type: Boolean,
+      required: true
     }
+  },
+
+  created() {
+      this.isCurrent = this.q;
+      this.isDone = this.c;
   },
 
   computed: {
     completed() {
-      return this.c;
+      return this.isDone;
     }
   },
 
   methods: {
     toggleQ() {
       if (!this.completed) {
-        this.q = !this.q;
+        this.isCurrent = !this.isCurrent;
         this.dispatchAction();
       }
     },
 
     toggleCompletion() {
       if (this.completed) {
-        this.c = false;
-        this.q = false;
+        this.isDone = false;
+        this.isCurrent = false;
         this.dispatchAction();
       } else {
-        this.c = true;
-        this.q = null;
+        this.isDone = true;
+        this.isCurrent = null;
         this.dispatchAction();
       }
     },
@@ -58,8 +71,8 @@ export default {
       this.$store.dispatch("poems/updatePoemStatus", {
         id: this.id,
         p: {
-          completed: this.c,
-          in_progress: this.q
+          completed: this.isDone,
+          in_progress: this.isCurrent
         }
       });
     }
