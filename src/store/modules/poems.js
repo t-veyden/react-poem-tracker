@@ -5,6 +5,7 @@ const poems = {
 
   state: {
     poems: [],
+    poem: {},
     isAdded: false
   },
 
@@ -31,6 +32,10 @@ const poems = {
       state.poems = poems;
     },
 
+    getSinglePoem(state, poem) {
+      state.poem = poem;
+    },
+
     addPoem(state) {
       state.isAdded = true;
     },
@@ -49,6 +54,16 @@ const poems = {
         .catch(error => {
           console.log(error.statusText)
         })
+    },
+
+    getSinglePoem({commit}, id) {
+      Vue.http.get(`http://localhost:3000/poems/${id}`).
+      then(response => {
+        commit('getSinglePoem', response.body);
+      })
+      .catch(error => {
+        console.log(error.statusText);
+      });
     },
 
     addPoem({commit}, payload) {

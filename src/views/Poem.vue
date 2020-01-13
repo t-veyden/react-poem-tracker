@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 import TPoem from "../components/Poem";
 import TActions from "../components/PoemActions";
 
@@ -14,7 +15,6 @@ export default {
   name: "Poem",
   data() {
     return {
-      poem: {},
       id: this.$route.params.id
     };
   },
@@ -25,15 +25,11 @@ export default {
   },
 
   created() {
-    this.getPoem(this.id);
+    this.$store.dispatch('poems/getSinglePoem', this.id);
   },
 
-  methods: {
-    getPoem(id) {
-      this.$http.get(`http://localhost:3000/poems/${id}`).then(response => {
-        this.poem = response.body;
-      });
-    }
+  computed: {
+    ...mapState('poems', ['poem'])
   }
 };
 </script>
