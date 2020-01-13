@@ -64,6 +64,7 @@ export default {
 
 .bottom-nav {
   &__item {
+    position: relative;
     padding: 4px;
     opacity: 0.7;
   }
@@ -79,6 +80,15 @@ export default {
     display: block;
     font-size: 12px;
     text-decoration: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
