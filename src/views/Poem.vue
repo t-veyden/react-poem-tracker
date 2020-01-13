@@ -2,11 +2,13 @@
   <div class="poem-view">
     <h1>This is a single poem page</h1>
     <t-poem :poemData="poem" />
+    <t-actions :id="id" class="pl-12" />
   </div>
 </template>
 
 <script>
 import TPoem from "../components/Poem";
+import TActions from "../components/PoemActions";
 
 export default {
   name: "Poem",
@@ -18,7 +20,8 @@ export default {
   },
 
   components: {
-    TPoem
+    TPoem,
+    TActions
   },
 
   created() {

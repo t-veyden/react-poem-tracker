@@ -61,6 +61,15 @@ const poems = {
           commit('clearMessage');
         }, 3000);
       })
+    },
+
+    updatePoemStatus({commit}, payload) {
+      console.log(payload);
+      Vue.http.patch(`http://localhost:3000/poems/${payload.id}`, payload.p, {'Content-Type': 'application/json'})
+      .then(response => {console.log(response); response.json()})
+      .then(response => {
+        console.log('PATCH');
+      });
     }
   }
 }
