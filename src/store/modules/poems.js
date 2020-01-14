@@ -15,15 +15,15 @@ const poems = {
     },
 
     completedPoems(state) {
-      return state.poems.filter(poem => !poem.in_progress && poem.completed);
+      return state.poems.filter(poem => poem.completed);
     },
 
     pendingPoems(state) {
-      return state.poems.filter(poem => !poem.in_progress && !poem.completed);
+      return state.poems.filter(poem => !poem.completed);
     },
 
     currentPoems(state) {
-      return state.poems.filter(poem => poem.in_progress && !poem.completed);
+      return state.poems.filter(poem => poem.in_progress);
     }
   },
 
