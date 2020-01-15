@@ -2,11 +2,7 @@
   <div class="purgatory">
     <h1>Welcome to Purgatory</h1>
 
-    <input type="search" placeholder="search here">
-    <v-radio-group v-model="searchBy" row>
-      <v-radio label="by author" value="author"/>
-      <v-radio label="by title" value="title"/>
-    </v-radio-group>
+    <t-search @search="findPoem($event)"/>
     <hr>
 
     <div class="filter">
@@ -27,7 +23,7 @@
     <hr>
 
     <ul>
-      <li class="purgatory__item" v-for="poem in sortedPoems" :key="poem.id">
+      <li class="purgatory__item" v-for="poem in filteredPoems" :key="poem.id">
         <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
         <span>&nbsp;by {{ poem.author }}</span>
       </li>
@@ -37,26 +33,34 @@
 
 <script>
   import {mapGetters} from 'vuex';
+  import {searchMixin} from '../utils';
+  import TSearch from '../components/Search';
 
   export default {
     name: "Purgatory",
 
+    mixins: [
+      searchMixin
+    ],
+
+    components: {
+      TSearch
+    },
+
     data() {
       return {
-        sortedPoems: [],
         filters: [
           {id: 'short', label: 'short ones'},
           {id: 'sonnet', label: 'gimme sonnets'},
           {id: 'shakespeare', label: 'shakespeare only'}
         ],
-        searchBy: 'author',
         luckyEnabled: false
       }
     },
 
     created() {
       this.$store.dispatch('poems/getPoemsData');
-      this.sortedPoems = this.pendingPoems;
+      this.dataStore = 'pendingPoems';
     },
 
     computed: {
