@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input type="search" placeholder="find your beauty" v-model="query" />
-    <v-radio-group v-model="searchBy" row>
+    <input type="search" placeholder="find your beauty" v-model="search.query" />
+    <v-radio-group v-model="search.by" row>
       <v-radio label="by author" value="author" />
       <v-radio label="by title" value="title" />
     </v-radio-group>
@@ -14,18 +14,26 @@ export default {
 
   data() {
     return {
-      searchBy: "title",
-      query: ""
+      search: {
+        query: "",
+        by: "title"
+      }
     };
   },
 
   watch: {
-    query() {
-      clearTimeout(this._timerId);
+    search: {
+      handler() {
+        clearTimeout(this._timerId);
 
-      this._timerId = setTimeout(() => {
-        this.$emit("search", { query: this.query, searchBy: this.searchBy });
-      }, 300);
+        this._timerId = setTimeout(() => {
+          this.$emit("search", {
+            query: this.search.query,
+            searchBy: this.search.by
+          });
+        }, 300);
+      },
+      deep: true
     }
   }
 };
