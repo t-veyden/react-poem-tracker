@@ -1,13 +1,14 @@
 export default {
   data() {
     return {
-      search: ""
+      search: "",
+      dataStore: ""
     };
   },
 
   computed: {
     filteredPoems() {
-      return this.completedPoems.filter(poem => {
+      return this[this.dataStore].filter(poem => {
         return poem.title.toLowerCase().includes(this.search.toLowerCase());
       });
     }

@@ -31,6 +31,7 @@
 
     created() {
       this.$store.dispatch('poems/getPoemsData');
+      this.dataStore = 'completedPoems';
     },
 
     computed: {
