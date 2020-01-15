@@ -23,7 +23,7 @@
     <hr>
 
     <ul>
-      <li class="purgatory__item" v-for="poem in filteredPoems" :key="poem.id">
+      <li class="purgatory__item" v-for="poem in randomPoems || filteredPoems" :key="poem.id">
         <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
         <span>&nbsp;by {{ poem.author }}</span>
       </li>
@@ -54,6 +54,7 @@
           {id: 'sonnet', label: 'gimme sonnets'},
           {id: 'shakespeare', label: 'shakespeare only'}
         ],
+        randomPoems: null,
         luckyEnabled: false
       }
     },
@@ -70,12 +71,12 @@
     methods: {
 
       getRandomPoem() {
-        this.sortedPoems = [this.pendingPoems[Math.floor(Math.random() * this.pendingPoems.length)]];
+        this.randomPoems = [this.filteredPoems[Math.floor(Math.random() * this.filteredPoems.length)]];
         this.luckyEnabled = true;
       },
 
       showAll() {
-        this.sortedPoems = this.pendingPoems;
+        this.randomPoems = null;
         this.luckyEnabled = false;
       }
     }
