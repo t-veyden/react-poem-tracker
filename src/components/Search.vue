@@ -14,7 +14,7 @@ export default {
 
   data() {
     return {
-      searchBy: "author",
+      searchBy: "title",
       query: ""
     };
   },
@@ -24,7 +24,7 @@ export default {
       clearTimeout(this._timerId);
 
       this._timerId = setTimeout(() => {
-        this.$emit("search", this.query);
+        this.$emit("search", { query: this.query, searchBy: this.searchBy });
       }, 300);
     }
   }
