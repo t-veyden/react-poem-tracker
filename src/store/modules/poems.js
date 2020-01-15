@@ -78,12 +78,13 @@ const poems = {
       })
     },
 
-    updatePoemStatus({commit}, payload) {
+    updatePoemStatus({commit, dispatch}, payload) {
       console.log(payload);
       Vue.http.patch(`http://localhost:3000/poems/${payload.id}`, payload.p, {'Content-Type': 'application/json'})
       .then(response => {console.log(response); response.json()})
       .then(response => {
         console.log('PATCH');
+        dispatch('getSinglePoem', payload.id);
       });
     }
   }

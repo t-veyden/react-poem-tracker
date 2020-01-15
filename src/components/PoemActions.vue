@@ -1,11 +1,11 @@
 <template>
   <v-card-actions>
-    <v-btn v-if="isCurrent !== null" @click="toggleQ">
-      <span v-if="!isCurrent">queue</span>
+    <v-btn v-if="q !== null" @click="toggleQ">
+      <span v-if="!q">queue</span>
       <span v-else>UNqueue</span>
     </v-btn>
     <v-btn @click="toggleCompletion">
-      <span v-if="!isDone">complete it</span>
+      <span v-if="!c">complete it</span>
       <span v-else>UNcomplete</span>
     </v-btn>
   </v-card-actions>
@@ -14,12 +14,6 @@
 <script>
 export default {
   name: "PoemActions",
-  data() {
-    return {
-      isCurrent: false,
-      isDone: false
-    };
-  },
 
   props: {
     id: {
@@ -27,53 +21,40 @@ export default {
       required: true
     },
     q: {
-      type: Boolean || null,
-      required: true
+      type: Boolean || null
     },
     c: {
-      type: Boolean,
-      required: true
-    }
-  },
-
-  created() {
-      this.isCurrent = this.q;
-      this.isDone = this.c;
-  },
-
-  computed: {
-    completed() {
-      return this.isDone;
+      type: Boolean
     }
   },
 
   methods: {
     toggleQ() {
-      if (!this.completed) {
-        this.isCurrent = !this.isCurrent;
-        this.dispatchAction();
-      }
+      const payload = {
+        completed: this.c,
+        in_progress: !this.q
+      };
+      this.dispatchAction(payload);
     },
 
     toggleCompletion() {
-      if (this.completed) {
-        this.isDone = false;
-        this.isCurrent = false;
-        this.dispatchAction();
-      } else {
-        this.isDone = true;
-        this.isCurrent = null;
-        this.dispatchAction();
-      }
+      const payload = this.c
+        ? {
+            completed: false,
+            in_progress: false
+          }
+        : {
+            completed: true,
+            in_progress: null
+          };
+
+      this.dispatchAction(payload);
     },
 
-    dispatchAction() {
+    dispatchAction(payload) {
       this.$store.dispatch("poems/updatePoemStatus", {
         id: this.id,
-        p: {
-          completed: this.isDone,
-          in_progress: this.isCurrent
-        }
+        p: payload
       });
     }
   }
