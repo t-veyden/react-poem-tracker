@@ -1,13 +1,24 @@
 <template>
   <v-card-actions>
-    <v-btn v-if="q !== null" @click="toggleQ">
-      <span v-if="!q">queue</span>
-      <span v-else>UNqueue</span>
-    </v-btn>
-    <v-btn @click="toggleCompletion">
-      <span v-if="!c">complete it</span>
-      <span v-else>UNcomplete</span>
-    </v-btn>
+    <div>
+      <v-btn v-if="q !== null" @click="toggleQ">
+        <span v-if="!q">queue</span>
+        <span v-else>UNqueue</span>
+      </v-btn>
+      <v-btn @click="toggleCompletion">
+        <span v-if="!c">complete it</span>
+        <span v-else>UNcomplete</span>
+      </v-btn>
+    </div>
+
+    <div>
+      <v-btn @click="callConfirm">
+        Delete
+      </v-btn>
+      <v-btn>
+        Edit
+      </v-btn>
+    </div>
   </v-card-actions>
 </template>
 
@@ -34,7 +45,7 @@ export default {
         completed: this.c,
         in_progress: !this.q
       };
-      this.dispatchAction(payload);
+      this.updateStatus(payload);
     },
 
     toggleCompletion() {
@@ -48,14 +59,24 @@ export default {
             in_progress: null
           };
 
-      this.dispatchAction(payload);
+      this.updateStatus(payload);
     },
 
-    dispatchAction(payload) {
+    callConfirm() {
+      const confirmDelete = confirm("You're sure you want to delete this?");
+      if(confirmDelete) this.deletePoem();
+    },
+
+    updateStatus(payload) {
       this.$store.dispatch("poems/updatePoemStatus", {
         id: this.id,
         p: payload
       });
+    },
+
+    deletePoem() {
+      this.$store.dispatch("poems/deletePoem", this.id);
+      this.$router.go(-1);
     }
   }
 };
