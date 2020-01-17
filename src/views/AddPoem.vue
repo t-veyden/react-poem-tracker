@@ -24,9 +24,6 @@
     </v-form>
     <!--  preview?  -->
 
-    <div v-if="isAdded">
-      you just added a new poem
-    </div>
   </div>
 </template>
 
@@ -50,13 +47,6 @@
       }
     },
 
-    computed: {
-      isAdded() {
-        let status = this.$store.getters['poems/newPoemStatus'];
-        return status;
-      }
-    },
-
     methods: {
       preparePoem() {
         if (!this.newPoem.title) this.newPoem.title = '***';
@@ -70,6 +60,7 @@
       submitPoem() {
         this.preparePoem();
         this.$store.dispatch('poems/addPoem', this.newPoem);
+        this.showMessage();
         this.clearForm();
       },
 
@@ -84,6 +75,11 @@
         };
 
         this.status = 'pending';
+      },
+
+      showMessage() {
+        const message = "You just added a new poem";
+        this.$store.commit('ux/setSnackState', {message, snackState: true});
       }
     }
   }
