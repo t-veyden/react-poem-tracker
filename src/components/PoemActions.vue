@@ -76,7 +76,15 @@ export default {
 
     deletePoem() {
       this.$store.dispatch("poems/deletePoem", this.id);
-      this.$router.go(-1);
+      this.showMessage();
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 2000);
+    },
+
+    showMessage() {
+      const message = "Tis gone";
+      this.$store.commit('ux/setSnackState', {message, snackState: true});
     }
   }
 };

@@ -19,6 +19,8 @@
       </v-container>
     </v-content>
 
+    <t-snackbar/>
+
     <v-footer app>
       <span>&copy; OneManBand 2019</span>
     </v-footer>

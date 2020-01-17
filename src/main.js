@@ -5,8 +5,12 @@ import store from './store/store';
 import vuetify from './plugins/vuetify';
 import VueResource from 'vue-resource';
 import wysiwyg from "vue-wysiwyg";
+import Snackbar from './components/Snackbar';
 
 Vue.config.productionTip = false;
+
+// global components
+Vue.component('t-snackbar', Snackbar);
 
 Vue.use(VueResource);
 
