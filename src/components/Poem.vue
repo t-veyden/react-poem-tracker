@@ -13,12 +13,10 @@
 
 <script>
 export default {
-  name: "Poem",
+  name: 'Poem',
 
   data() {
-    return {
-
-    };
+    return {};
   },
 
   props: {

@@ -1,7 +1,9 @@
 <template>
   <ul class="t-bars">
     <li class="t-bar" v-for="poem in poemBars" :key="poem.id">
-      <router-link class="t-bar__link" :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
+      <router-link class="t-bar__link" :to="`/poem/${poem.id}`">{{
+        poem.title
+      }}</router-link>
       &nbsp;
       <span class="t-bar__delimeter">..</span>
       &nbsp;
@@ -12,7 +14,7 @@
 
 <script>
 export default {
-  name: "Bars",
+  name: 'Bars',
   data() {
     return {
       bars: [],

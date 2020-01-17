@@ -1,6 +1,10 @@
 <template>
   <div>
-    <input type="search" placeholder="find your beauty" v-model="search.query" />
+    <input
+      type="search"
+      placeholder="find your beauty"
+      v-model="search.query"
+    />
     <v-radio-group v-model="search.by" row>
       <v-radio label="by author" value="author" />
       <v-radio label="by title" value="title" />
@@ -10,13 +14,13 @@
 
 <script>
 export default {
-  name: "Search",
+  name: 'Search',
 
   data() {
     return {
       search: {
-        query: "",
-        by: "title"
+        query: '',
+        by: 'title'
       }
     };
   },
@@ -27,7 +31,7 @@ export default {
         clearTimeout(this._timerId);
 
         this._timerId = setTimeout(() => {
-          this.$emit("search", {
+          this.$emit('search', {
             query: this.search.query,
             searchBy: this.search.by
           });

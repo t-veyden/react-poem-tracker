@@ -10,13 +10,15 @@ export default {
   computed: {
     filteredPoems() {
       return this[this.dataStore].filter(poem => {
-        return poem[this.searchBy].toLowerCase().includes(this.search.toLowerCase());
+        return poem[this.searchBy]
+          .toLowerCase()
+          .includes(this.search.toLowerCase());
       });
     }
   },
 
   methods: {
-    findPoem({query, searchBy}) {
+    findPoem({ query, searchBy }) {
       this.search = query;
       this.searchBy = searchBy;
     }

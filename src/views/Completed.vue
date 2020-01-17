@@ -2,7 +2,7 @@
   <div class="completed">
     <h1>Well done, here are your Completed</h1>
 
-    <t-search @search="findPoem($event)"/>
+    <t-search @search="findPoem($event)" />
 
     <ul>
       <li class="purgatory__item" v-for="poem in filteredPoems" :key="poem.id">
@@ -14,32 +14,27 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
-  import {searchMixin} from '../utils';
-  import TSearch from '../components/Search';
+import { mapGetters } from 'vuex';
+import { searchMixin } from '../utils';
+import TSearch from '../components/Search';
 
-  export default {
-    name: "Completed",
+export default {
+  name: 'Completed',
 
-    mixins: [
-      searchMixin
-    ],
+  mixins: [searchMixin],
 
-    components: {
-      TSearch
-    },
+  components: {
+    TSearch
+  },
 
-    created() {
-      this.$store.dispatch('poems/getPoemsData');
-      this.dataStore = 'completedPoems';
-    },
+  created() {
+    this.$store.dispatch('poems/getPoemsData');
+    this.dataStore = 'completedPoems';
+  },
 
-    computed: {
-      ...mapGetters('poems', ['completedPoems'])
-    }
+  computed: {
+    ...mapGetters('poems', ['completedPoems'])
   }
+};
 </script>
 
-<style scoped>
-
-</style>

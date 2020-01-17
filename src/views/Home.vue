@@ -12,18 +12,23 @@
           v-model="currIdx"
         >
           <v-carousel-item v-for="(poem, idx) in currentPoems" :key="idx">
-            <t-poem :poemData="poem" @assignHeight="updateHeight"/>
-            <t-actions :id="poem.id" :q="poem.in_progress" :c="poem.completed" class="pl-12" />
+            <t-poem :poemData="poem" @assignHeight="updateHeight" />
+            <t-actions
+              :id="poem.id"
+              :q="poem.in_progress"
+              :c="poem.completed"
+              class="pl-12"
+            />
           </v-carousel-item>
         </v-carousel>
-        </v-card>
+      </v-card>
     </t-section>
 
     <t-section class="bar-section" sectionTitle="purgatory" typeOfBar>
-      <t-bars type="purgatory" :poems="pendingPoems"/>
+      <t-bars type="purgatory" :poems="pendingPoems" />
     </t-section>
     <t-section class="bar-section" sectionTitle="completed" typeOfBar>
-      <t-bars type="completed" :poems="completedPoems"/>
+      <t-bars type="completed" :poems="completedPoems" />
     </t-section>
 
     <!-- <h3>widget</h3>
@@ -34,61 +39,61 @@
 </template>
 
 <script>
-  import {mapState, mapGetters} from 'vuex';
-  import TSection from '../components/Section'
-  import TBars from '../components/Bars'
-  import TPoem from '../components/Poem'
-  import TActions from "../components/PoemActions";
-  import TWidget from '../components/Widget'
+import { mapState, mapGetters } from 'vuex';
+import TSection from '../components/Section';
+import TBars from '../components/Bars';
+import TPoem from '../components/Poem';
+import TActions from '../components/PoemActions';
+import TWidget from '../components/Widget';
 
-  export default {
-    components: {
-      TSection,
-      TPoem,
-      TActions,
-      TBars,
-      TWidget
-    },
+export default {
+  components: {
+    TSection,
+    TPoem,
+    TActions,
+    TBars,
+    TWidget
+  },
 
-    data() {
-      return {
-        currIdx: 0,
-        heights: []
-      }
-    },
+  data() {
+    return {
+      currIdx: 0,
+      heights: []
+    };
+  },
 
-    created() {
-      this.$store.dispatch('poems/getPoemsData');
-    },
+  created() {
+    this.$store.dispatch('poems/getPoemsData');
+  },
 
-    computed: {
-      ...mapState('poems', ['poems']),
-      ...mapGetters('poems', ['pendingPoems', 'currentPoems', 'completedPoems']),
+  computed: {
+    ...mapState('poems', ['poems']),
+    ...mapGetters('poems', ['pendingPoems', 'currentPoems', 'completedPoems']),
 
-      boxHeight() {
-        return this.heights.length ? this.heights[this.currIdx] + 100 : '350';
-      }
-    },
+    boxHeight() {
+      return this.heights.length ? this.heights[this.currIdx] + 100 : '350';
+    }
+  },
 
-    methods: {
-      updateHeight(evt) {
-        this.heights.splice(this.currIdx, 0, evt);
-      }
+  methods: {
+    updateHeight(evt) {
+      this.heights.splice(this.currIdx, 0, evt);
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>
- @import '../styles/style-heap.scss';
+@import '../styles/style-heap.scss';
 
 .home::v-deep {
   .v-card {
     box-shadow: none;
   }
 
-  .v-window__container, .v-carousel__item {
+  .v-window__container,
+  .v-carousel__item {
     height: inherit !important;
   }
 }
-
 </style>

@@ -19,7 +19,7 @@
       </v-container>
     </v-content>
 
-    <t-snackbar/>
+    <t-snackbar />
 
     <v-footer app>
       <span>&copy; OneManBand 2019</span>
@@ -28,11 +28,15 @@
     <v-bottom-navigation app class="bottom-nav">
       <div class="bottom-nav__item mr-4">
         <v-icon class="bottom-nav__icon">mdi-fire</v-icon>
-        <router-link class="bottom-nav__link" to="/purgatory">Purgatory</router-link>
+        <router-link class="bottom-nav__link" to="/purgatory"
+          >Purgatory</router-link
+        >
       </div>
       <div class="bottom-nav__item mr-4">
         <v-icon class="bottom-nav__icon">mdi-anchor</v-icon>
-        <router-link class="bottom-nav__link" to="/completed">Completed</router-link>
+        <router-link class="bottom-nav__link" to="/completed"
+          >Completed</router-link
+        >
       </div>
       <div class="bottom-nav__item">
         <v-icon class="bottom-nav__icon">mdi-plus</v-icon>
@@ -44,7 +48,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   data: () => ({
     //
   })
@@ -84,7 +88,7 @@ export default {
     text-decoration: none;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;

@@ -3,7 +3,7 @@ const ux = {
 
   state: {
     snackbar: {
-      message: "",
+      message: '',
       snackState: false
     }
   },

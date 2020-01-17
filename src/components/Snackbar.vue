@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
-  name: "Snackbar",
+  name: 'Snackbar',
   computed: {
     ...mapState({
       snackbar(state) {
@@ -24,7 +24,7 @@ export default {
   },
 
   watch: {
-    "snackbar.snackState"(val) {
+    'snackbar.snackState'(val) {
       if (val) {
         setTimeout(() => {
           this.close();
@@ -35,8 +35,8 @@ export default {
 
   methods: {
     close() {
-      this.$store.commit("ux/setSnackState", {
-        message: "",
+      this.$store.commit('ux/setSnackState', {
+        message: '',
         snackState: false
       });
     }

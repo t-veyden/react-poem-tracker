@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { uxMixin } from "../utils/index";
+import { uxMixin } from '../utils/index';
 
 export default {
-  name: "PoemActions",
+  name: 'PoemActions',
 
   props: {
     id: {
@@ -45,7 +45,7 @@ export default {
 
   data() {
     return {
-      snackbarMessage: "Tis gone"
+      snackbarMessage: 'Tis gone'
     };
   },
 
@@ -78,14 +78,14 @@ export default {
     },
 
     updateStatus(payload) {
-      this.$store.dispatch("poems/updatePoemStatus", {
+      this.$store.dispatch('poems/updatePoemStatus', {
         id: this.id,
         p: payload
       });
     },
 
     deletePoem() {
-      this.$store.dispatch("poems/deletePoem", this.id);
+      this.$store.dispatch('poems/deletePoem', this.id);
       this.showMessage(this.snackbarMessage);
       setTimeout(() => {
         this.$router.go(-1);

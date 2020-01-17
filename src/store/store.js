@@ -1,8 +1,8 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import admin from "./modules/admin";
-import ux from "./modules/ux";
-import poems from "./modules/poems";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import admin from './modules/admin';
+import ux from './modules/ux';
+import poems from './modules/poems';
 
 Vue.use(Vuex);
 
