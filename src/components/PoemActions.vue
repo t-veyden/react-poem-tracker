@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { uxMixin } from "../utils/index";
+
 export default {
   name: "PoemActions",
 
@@ -37,6 +39,14 @@ export default {
     c: {
       type: Boolean
     }
+  },
+
+  mixins: [uxMixin],
+
+  data() {
+    return {
+      snackbarMessage: "Tis gone"
+    };
   },
 
   methods: {
@@ -64,7 +74,7 @@ export default {
 
     callConfirm() {
       const confirmDelete = confirm("You're sure you want to delete this?");
-      if(confirmDelete) this.deletePoem();
+      if (confirmDelete) this.deletePoem();
     },
 
     updateStatus(payload) {
@@ -76,15 +86,10 @@ export default {
 
     deletePoem() {
       this.$store.dispatch("poems/deletePoem", this.id);
-      this.showMessage();
+      this.showMessage(this.snackbarMessage);
       setTimeout(() => {
         this.$router.go(-1);
       }, 2000);
-    },
-
-    showMessage() {
-      const message = "Tis gone";
-      this.$store.commit('ux/setSnackState', {message, snackState: true});
     }
   }
 };
