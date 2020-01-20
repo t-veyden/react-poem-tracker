@@ -1,8 +1,8 @@
 <template>
   <div class="edit-poem">
-    <v-form ref="editForm">
-      <v-text-field v-model="updPoem.title" label="Title" />
-      <v-text-field v-model="updPoem.author" label="Author" required />
+    <v-form ref="editForm" lazy-validation>
+      <v-text-field v-model="updPoem.title" label="Title" :rules="rules" />
+      <v-text-field v-model="updPoem.author" label="Author" :rules="rules" />
       <v-autocomplete
         :items="langs"
         label="Language"
@@ -32,7 +32,8 @@ export default {
         lang: ''
       },
       snackbarMessage: 'Update was successful',
-      langs: ['English', 'French', 'Spanish']
+      langs: ['English', 'French', 'Spanish'],
+      rules: [v => !!v || 'Данное поле не должно быть пустым']
     };
   },
 
@@ -82,7 +83,7 @@ export default {
 
   methods: {
     submitPoem() {
-      if (this.updPoem.text !== '') {
+      if (this.$refs.editForm.validate() && this.updPoem.text) {
         this.$store.dispatch('poems/updatePoemInfo', {
           id: this.id,
           body: this.updPoem
