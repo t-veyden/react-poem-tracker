@@ -7,7 +7,8 @@ const poems = {
     poems: [],
     poem: {},
     isAdded: false,
-    isDeleted: false
+    isDeleted: false,
+    isUpdated: false
   },
 
   getters: {
@@ -43,6 +44,10 @@ const poems = {
 
     deletePoem(state) {
       state.isDeleted = true;
+    },
+
+    updatePoemInfo(state) {
+      state.isUpdated = true;
     },
 
     clearMessage(state, target) {
@@ -94,11 +99,27 @@ const poems = {
         })
         .then(response => {
           console.log(response);
-          response.json();
+          response.json(); // what for?
         })
         .then(response => {
           console.log('PATCH');
           dispatch('getSinglePoem', payload.id);
+        });
+    },
+
+    updatePoemInfo({ commit }, payload) {
+      Vue.http
+        .patch(`http://localhost:3000/poems/${payload.id}`, payload.body, {
+          'Content-Type': 'application/json'
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .then(response => {
+          commit('updatePoemInfo');
+          setTimeout(() => {
+            commit('clearMessage', 'isUpdated');
+          }, 3000);
         });
     },
 

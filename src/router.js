@@ -38,6 +38,11 @@ export default new Router({
       component: () => import('./views/AddPoem.vue')
     },
     {
+      path: '/edit/:id',
+      name: 'edit',
+      component: () => import('./views/EditPoem.vue')
+    },
+    {
       path: '/poem/:id',
       name: 'poem',
       component: () => import('./views/Poem.vue')

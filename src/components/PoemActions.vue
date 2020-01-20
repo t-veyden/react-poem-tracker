@@ -15,7 +15,7 @@
       <v-btn @click="callConfirm">
         Delete
       </v-btn>
-      <v-btn>
+      <v-btn @click="redirectToEdit">
         Edit
       </v-btn>
     </div>
@@ -90,6 +90,10 @@ export default {
       setTimeout(() => {
         this.$router.go(-1);
       }, 2000);
+    },
+
+    redirectToEdit() {
+      this.$router.push(`/edit/${this.id}`)
     }
   }
 };
