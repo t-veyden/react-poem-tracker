@@ -3,6 +3,11 @@
     <h1>I heard you'd like to add another one</h1>
     <v-form ref="addForm" lazy-validation>
       <v-text-field v-model="newPoem.title" label="Title" :rules="rules" />
+      <v-checkbox
+        v-model="noTitle"
+        label="No title here"
+        @change="updateTitle('newPoem')"
+      />
       <v-text-field v-model="newPoem.author" label="Author" :rules="rules" />
       <v-autocomplete
         :items="langs"
@@ -29,12 +34,12 @@
 </template>
 
 <script>
-import { uxMixin } from '../utils';
+import { uxMixin, textMixin } from '../utils';
 
 export default {
   name: 'AddPoem',
 
-  mixins: [uxMixin],
+  mixins: [uxMixin, textMixin],
 
   data() {
     return {
@@ -50,7 +55,7 @@ export default {
       completionStates: ['current', 'pending', 'completed'],
       langs: ['English', 'French', 'Spanish'],
       snackbarMessage: 'You just added a new poem',
-      rules: [v => !!v || 'Данное поле не должно быть пустым']
+      rules: [v => !!v || "This field shouldn't be empty"]
     };
   },
 

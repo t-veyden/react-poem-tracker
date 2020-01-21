@@ -2,6 +2,11 @@
   <div class="edit-poem">
     <v-form ref="editForm" lazy-validation>
       <v-text-field v-model="updPoem.title" label="Title" :rules="rules" />
+      <v-checkbox
+        v-model="noTitle"
+        label="No title here"
+        @change="updateTitle('updPoem')"
+      />
       <v-text-field v-model="updPoem.author" label="Author" :rules="rules" />
       <v-autocomplete
         :items="langs"
@@ -19,7 +24,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { uxMixin } from '../utils';
+import { uxMixin, textMixin } from '../utils';
 
 export default {
   data() {
@@ -33,11 +38,11 @@ export default {
       },
       snackbarMessage: 'Update was successful',
       langs: ['English', 'French', 'Spanish'],
-      rules: [v => !!v || 'Данное поле не должно быть пустым']
+      rules: [v => !!v || "This field shouldn't be empty"]
     };
   },
 
-  mixins: [uxMixin],
+  mixins: [uxMixin, textMixin],
 
   computed: {
     ...mapState('poems', ['poem']),
