@@ -7,7 +7,11 @@
         label="No title here"
         @change="updateTitle('updPoem')"
       />
-      <v-text-field v-model="updPoem.author" label="Author" :rules="rules" />
+      <v-text-field
+        v-model="updPoem.author.name"
+        label="Author"
+        :rules="rules"
+      />
       <v-autocomplete
         :items="langs"
         label="Language"
@@ -32,7 +36,10 @@ export default {
       id: this.$route.params.id,
       updPoem: {
         title: '',
-        author: '',
+        author: {
+          name: '',
+          id: ''
+        },
         text: '',
         lang: ''
       },
@@ -50,7 +57,7 @@ export default {
     isChanged() {
       if (this.isLoaded) {
         const keys = Object.keys(this.updPoem);
-        const differ = key => this.updPoem[key] !== this.poem[key];
+        const differ = key => this.updPoem[key] !== this.poem[key]; // damn, we have a nested object now
         return keys.some(differ);
       } else return false;
     },

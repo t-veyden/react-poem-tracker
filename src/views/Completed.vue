@@ -7,7 +7,7 @@
     <ul>
       <li class="purgatory__item" v-for="poem in filteredPoems" :key="poem.id">
         <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
-        <span>&nbsp;by {{ poem.author }}</span>
+        <span>&nbsp;by {{ poem.author.name }}</span>
       </li>
     </ul>
   </div>
@@ -37,4 +37,3 @@ export default {
   }
 };
 </script>
-

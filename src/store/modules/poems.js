@@ -26,6 +26,20 @@ const poems = {
 
     currentPoems(state) {
       return state.poems.filter(poem => poem.in_progress);
+    },
+
+    authorsList(state) {
+      return state.poems.map(poem => poem.author);
+    },
+
+    auhtorID(state) {
+      return name =>
+        state.poems.reduce((acc, poem) => {
+          if (poem.author.name === name) {
+            acc = poem.author.id;
+          }
+          return acc;
+        }, null);
     }
   },
 

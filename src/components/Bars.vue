@@ -7,7 +7,7 @@
       &nbsp;
       <span class="t-bar__delimeter">..</span>
       &nbsp;
-      <small class="t-bar__author">{{ poem.author }}</small>
+      <small class="t-bar__author">{{ poem.author.name }}</small>
     </li>
   </ul>
 </template>

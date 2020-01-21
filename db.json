@@ -2,7 +2,10 @@
   "poems": [
     {
       "id": "asdasd",
-      "author": "robert frost",
+      "author": {
+        "name": "robert frost",
+        "id": "4534535"
+      },
       "title": "fire and ice",
       "text": [
         "Some say the world will end in fire,",
@@ -21,7 +24,10 @@
     },
     {
       "id": "skdksjd",
-      "author": "shakespeare",
+      "author": {
+        "name": "shakespeare",
+        "id": "345346df"
+      },
       "title": "sonnet 130",
       "text": [
         "My mistress' eyes are nothing like the sun;",
@@ -45,7 +51,10 @@
     },
     {
       "id": "skdksjdfsdf",
-      "author": "pablo neruda",
+      "author": {
+        "name": "pablo neruda",
+        "id": "4567567njh"
+      },
       "title": "soneto xvii",
       "text": [
         "No te amo como si fueras rosa de sal, topacio",
@@ -72,19 +81,22 @@
     },
     {
       "id": "2sdfwe",
-      "author": "someone",
-      "title": "***",
-      "text": [
-        "smth smth smth",
-        "smth smth else"
-      ],
+      "author": {
+        "name": "someone",
+        "id": "retertert45"
+      },
+      "title": "smth smth smth...",
+      "text": "<div>smth smth smth</div><div>smth smth else</div>",
       "completed": false,
       "in_progress": false,
       "lang": "english"
     },
     {
       "id": "cvxcvxc",
-      "author": "nobody",
+      "author": {
+        "name": "nobody",
+        "id": "45456gkhl"
+      },
       "title": "cats",
       "text": [
         "cats are everywhere",
@@ -96,7 +108,10 @@
     },
     {
       "id": "sdfsdfs",
-      "author": "nobody",
+      "author": {
+        "name": "nobody",
+        "id": "45456gkhl"
+      },
       "title": "silence",
       "text": [
         "...",
@@ -108,7 +123,10 @@
     },
     {
       "id": "sdfsdfssddsd",
-      "author": "nobody",
+      "author": {
+        "name": "nobody",
+        "id": "45456gkhl"
+      },
       "title": "suddenly",
       "text": [
         "suddenly",
@@ -120,7 +138,10 @@
     },
     {
       "id": "sdfs4545ssddsd",
-      "author": "nobody",
+      "author": {
+        "name": "nobody",
+        "id": "45456gkhl"
+      },
       "title": "more suddenly",
       "text": [
         "even more suddenly",
@@ -132,7 +153,10 @@
     },
     {
       "id": "2sdfwesdsd",
-      "author": "someone2",
+      "author": {
+        "name": "someone2",
+        "id": "345hjgj"
+      },
       "title": "***",
       "text": [
         "smth smth smth",
@@ -145,7 +169,10 @@
     },
     {
       "id": "cvxcvxcasdad",
-      "author": "nobody2",
+      "author": {
+        "name": "nobody2",
+        "id": "dfgdfg45454"
+      },
       "title": "more cats",
       "text": [
         "cats are everywhere",
@@ -158,7 +185,10 @@
     },
     {
       "id": "sdfsdfswewee",
-      "author": "nobody2",
+      "author": {
+        "name": "nobody2",
+        "id": "dfgdfg45454"
+      },
       "title": "more silence",
       "text": [
         "...",
@@ -171,7 +201,10 @@
     },
     {
       "id": "sdsd';lpo",
-      "author": "e.e.cummings",
+      "author": {
+        "name": "e.e.cummings",
+        "id": "678sdfsdf"
+      },
       "title": "i carry your heart",
       "text": [
         "i carry your heart with me(i carry it in",
@@ -198,7 +231,10 @@
     },
     {
       "id": "kkhkjhkj",
-      "author": "someone else",
+      "author": {
+        "name": "someone else",
+        "id": "678345345gh"
+      },
       "title": "line",
       "text": [
         "line"
@@ -206,6 +242,42 @@
       "completed": true,
       "in_progress": false,
       "lang": "english"
+    },
+    {
+      "author": {
+        "name": "23423423",
+        "id": "sdf4354545kj"
+      },
+      "title": "234",
+      "text": "<div>dfgjlkgfj</div><div>123</div><div>1233455546</div>",
+      "completed": false,
+      "in_progress": false,
+      "lang": "English",
+      "id": "HAboRWt"
+    },
+    {
+      "author": {
+        "name": "8",
+        "id": "sdf435kj"
+      },
+      "title": "dsfsdfsdf sdfsdf sdf...",
+      "text": "<div>dsfsdfsdf sdfsdf sdfsdfsdf sdfsdfsdfdfsdf sdfsdfsdf sdfsdfsdf</div>6768678",
+      "completed": false,
+      "in_progress": false,
+      "lang": "English",
+      "id": "TIGn0nC"
+    },
+    {
+      "author": {
+        "name": "fgdfg",
+        "id": "dvsj6huu0rl"
+      },
+      "title": "title title",
+      "text": "dgdg<div>eljflf cat cat cat</div>",
+      "completed": false,
+      "in_progress": false,
+      "lang": "English",
+      "id": "s62dFsS"
     }
   ],
   "users": [

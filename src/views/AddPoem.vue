@@ -8,7 +8,12 @@
         label="No title here"
         @change="updateTitle('newPoem')"
       />
-      <v-text-field v-model="newPoem.author" label="Author" :rules="rules" />
+      <v-text-field
+        v-model="newPoem.author.name"
+        @blur="defineID"
+        label="Author"
+        :rules="rules"
+      />
       <v-autocomplete
         :items="langs"
         label="Language"
@@ -28,13 +33,16 @@
       <wysiwyg v-model="newPoem.text" />
       <v-btn text @click="submitPoem">Add poem</v-btn>
       <v-btn text @click="clearForm">Clear</v-btn>
+      <v-btn @click="defineID">TEST</v-btn>
     </v-form>
     <!--  preview?  -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { uxMixin, textMixin } from '../utils';
+import { generateID } from '../utils/helpers';
 
 export default {
   name: 'AddPoem',
@@ -44,7 +52,10 @@ export default {
   data() {
     return {
       newPoem: {
-        author: '',
+        author: {
+          name: '',
+          id: ''
+        },
         title: '',
         text: '',
         completed: false,
@@ -59,7 +70,21 @@ export default {
     };
   },
 
+  created() {
+    this.$store.dispatch('poems/getPoemsData');
+  },
+
+  computed: {
+    ...mapGetters('poems', ['auhtorID'])
+  },
+
   methods: {
+    defineID() {
+      if (this.auhtorID(this.newPoem.author.name) !== null) {
+        this.newPoem.author.id = this.auhtorID(this.newPoem.author.name);
+      } else this.newPoem.author.id = generateID();
+    },
+
     preparePoem() {
       if (!this.newPoem.title) this.newPoem.title = '***';
       if (this.status === 'current') {
@@ -80,7 +105,10 @@ export default {
 
     clearForm() {
       this.newPoem = {
-        author: '',
+        author: {
+          name: '',
+          id: ''
+        },
         title: '',
         text: '',
         completed: false,
