@@ -11,5 +11,6 @@ export default new Vuex.Store({
     admin,
     ux,
     poems
-  }
+  },
+  strict: process.env.NODE_ENV !== 'production'
 });
