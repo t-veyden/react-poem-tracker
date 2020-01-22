@@ -10,7 +10,7 @@
       />
       <v-text-field
         v-model="newPoem.author.name"
-        @blur="defineID"
+        @blur="updateID"
         label="Author"
         :rules="rules"
       />
@@ -33,7 +33,6 @@
       <wysiwyg v-model="newPoem.text" />
       <v-btn text @click="submitPoem">Add poem</v-btn>
       <v-btn text @click="clearForm">Clear</v-btn>
-      <v-btn @click="defineID">TEST</v-btn>
     </v-form>
     <!--  preview?  -->
   </div>
@@ -42,7 +41,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { uxMixin, textMixin } from '../utils';
-import { generateID } from '../utils/helpers';
+import { defineID } from '../utils/helpers';
 
 export default {
   name: 'AddPoem',
@@ -79,10 +78,8 @@ export default {
   },
 
   methods: {
-    defineID() {
-      if (this.auhtorID(this.newPoem.author.name) !== null) {
-        this.newPoem.author.id = this.auhtorID(this.newPoem.author.name);
-      } else this.newPoem.author.id = generateID();
+    updateID() {
+      this.newPoem.author.id = defineID(this.newPoem.author.name);
     },
 
     preparePoem() {

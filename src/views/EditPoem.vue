@@ -9,6 +9,7 @@
       />
       <v-text-field
         v-model="updPoem.author.name"
+        @blur="updateID"
         label="Author"
         :rules="rules"
       />
@@ -29,6 +30,7 @@
 <script>
 import { mapState } from 'vuex';
 import { uxMixin, textMixin } from '../utils';
+import { defineID } from '../utils/helpers';
 
 export default {
   data() {
@@ -68,6 +70,7 @@ export default {
   },
 
   created() {
+    this.$store.dispatch('poems/getPoemsData');
     this.$store.dispatch('poems/getSinglePoem', this.id);
   },
 
@@ -76,10 +79,15 @@ export default {
       const keys = Object.keys(this.updPoem);
       if (val) {
         keys.forEach(key => {
-          if (key !== 'text') {
+          if (key !== 'text' && key !== 'author') {
             this.updPoem[key] = this.poem[key];
           }
         });
+
+        this.updPoem.author = Object.assign(
+          this.updPoem.author,
+          this.poem.author
+        );
 
         if (Array.isArray(this.poem.text)) {
           const poemString = this.poem.text
@@ -94,6 +102,10 @@ export default {
   },
 
   methods: {
+    updateID() {
+      this.updPoem.author.id = defineID(this.updPoem.author.name);
+    },
+
     submitPoem() {
       if (this.$refs.editForm.validate() && this.updPoem.text) {
         this.$store.dispatch('poems/updatePoemInfo', {

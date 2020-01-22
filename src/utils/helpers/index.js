@@ -1,3 +1,4 @@
 import generateID from './generateID';
+import defineID from './defineID';
 
-export { generateID };
+export { generateID, defineID };
