@@ -59,13 +59,18 @@ export default {
     isChanged() {
       if (this.isLoaded) {
         const keys = Object.keys(this.updPoem);
-        const differ = key => this.updPoem[key] !== this.poem[key]; // damn, we have a nested object now
-        return keys.some(differ);
+        const nestedKeys = Object.keys(this.updPoem.author);
+        keys.splice(keys.indexOf('author'), 1);
+
+        const differ = this.checkDiff(['updPoem'], ['poem']);
+        const nestedDiffer = this.checkDiff(['updPoem', 'author'], ['poem', 'author']);
+
+        return keys.some(differ) || nestedKeys.some(nestedDiffer);
       } else return false;
     },
 
     isLoaded() {
-      return Object.keys(this.poem);
+      return this.poem.author !== undefined;
     }
   },
 
@@ -104,6 +109,19 @@ export default {
   methods: {
     updateID() {
       this.updPoem.author.id = defineID(this.updPoem.author.name);
+    },
+
+    checkDiff(x, y) {
+      return (key) => {
+        return this.getPath(x)[key] !== this.getPath(y)[key];
+      }
+    },
+
+    getPath(keyArr) {
+      const path = keyArr.reduce((acc, key) => {
+        return acc[key];
+      }, this)
+      return path;
     },
 
     submitPoem() {
