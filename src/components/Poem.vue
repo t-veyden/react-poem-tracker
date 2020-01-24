@@ -11,30 +11,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Poem',
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-  props: {
-    poemData: Object
-  },
+@Component({
+  name: 'Poem'
+})
+export default class Poem extends Vue {
+  @Prop(Object) poemData: object;
 
   mounted() {
     this.getBoxHeight();
-  },
-
-  computed: {
-    isLoaded() {
-      return this.poemData.author !== undefined;
-    }
-  },
-
-  methods: {
-    getBoxHeight() {
-      this.$emit('assignHeight', this.$refs.poemBox.clientHeight);
-    }
   }
-};
+
+  get isLoaded() {
+    return this.poemData.author !== undefined;
+  }
+
+  getBoxHeight() {
+    this.$emit('assignHeight', this.$refs.poemBox.clientHeight);
+  }
+}
 </script>
 
 <style scoped>
