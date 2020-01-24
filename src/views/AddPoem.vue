@@ -39,84 +39,78 @@
 </template>
 
 <script>
+import { mixins } from 'vue-class-component'
+import { Vue, Component } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 import { uxMixin, textMixin } from '../utils';
 import { defineID } from '../utils/helpers';
 
-export default {
+@Component({
   name: 'AddPoem',
-
-  mixins: [uxMixin, textMixin],
-
-  data() {
-    return {
-      newPoem: {
-        author: {
-          name: '',
-          id: ''
-        },
-        title: '',
-        text: '',
-        completed: false,
-        in_progress: false,
-        lang: 'English'
-      },
-      status: 'pending',
-      completionStates: ['current', 'pending', 'completed'],
-      langs: ['English', 'French', 'Spanish'],
-      snackbarMessage: 'You just added a new poem',
-      rules: [v => !!v || "This field shouldn't be empty"]
-    };
-  },
+  computed: {
+    ...mapGetters('poems', ['auhtorID'])
+  }
+})
+export default class AddPoem extends mixins(uxMixin, textMixin) {
+  newPoem = {
+    author: {
+      name: '',
+      id: ''
+    },
+    title: '',
+    text: '',
+    completed: false,
+    in_progress: false,
+    lang: 'English'
+  };
+  status = 'pending';
+  completionStates = ['current', 'pending', 'completed'];
+  langs = ['English', 'French', 'Spanish'];
+  snackbarMessage = 'You just added a new poem';
+  rules = [v => !!v || "This field shouldn't be empty"];
 
   created() {
     this.$store.dispatch('poems/getPoemsData');
-  },
+  }
 
-  computed: {
-    ...mapGetters('poems', ['auhtorID'])
-  },
+  updateID() {
+    this.newPoem.author.id = defineID(this.newPoem.author.name);
+  }
 
-  methods: {
-    updateID() {
-      this.newPoem.author.id = defineID(this.newPoem.author.name);
-    },
-
-    preparePoem() {
-      if (!this.newPoem.title) this.newPoem.title = '***';
-      if (this.status === 'current') {
-        this.newPoem.in_progress = true;
-      } else if (this.status === 'completed') {
-        this.newPoem.completed = true;
-      }
-    },
-
-    submitPoem() {
-      this.preparePoem();
-      if (this.$refs.addForm.validate() && this.newPoem.text) {
-        this.$store.dispatch('poems/addPoem', this.newPoem);
-        this.showMessage(this.snackbarMessage);
-        this.clearForm();
-      }
-    },
-
-    clearForm() {
-      this.newPoem = {
-        author: {
-          name: '',
-          id: ''
-        },
-        title: '',
-        text: '',
-        completed: false,
-        in_progress: false,
-        lang: 'English'
-      };
-
-      this.status = 'pending';
+  preparePoem() {
+    if (!this.newPoem.title) this.newPoem.title = '***';
+    if (this.status === 'current') {
+      this.newPoem.in_progress = true;
+    } else if (this.status === 'completed') {
+      this.newPoem.completed = true;
     }
   }
-};
+
+  submitPoem() {
+    this.preparePoem();
+    if (this.$refs.addForm.validate() && this.newPoem.text) {
+      this.$store.dispatch('poems/addPoem', this.newPoem);
+      this.showMessage(this.snackbarMessage);
+      this.clearForm();
+    }
+  }
+
+  clearForm() {
+    this.newPoem = {
+      author: {
+        name: '',
+        id: ''
+      },
+      title: '',
+      text: '',
+      completed: false,
+      in_progress: false,
+      lang: 'English'
+    };
+
+    this.status = 'pending';
+  }
+}
 </script>
 
 <style scoped>
