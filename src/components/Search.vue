@@ -12,33 +12,28 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Search',
+<script lang="ts">
+import { Vue, Component, Watch } from 'vue-property-decorator';
 
-  data() {
-    return {
-      search: {
-        query: '',
-        by: 'title'
-      }
-    };
-  },
+@Component({
+  name: 'Search'
+})
+export default class Search extends Vue {
+  search = {
+    query: '',
+    by: 'title'
+  };
 
-  watch: {
-    search: {
-      handler() {
-        clearTimeout(this._timerId);
+  @Watch('search', { deep: true })
+  handler() {
+    clearTimeout(this._timerId);
 
-        this._timerId = setTimeout(() => {
-          this.$emit('search', {
-            query: this.search.query,
-            searchBy: this.search.by
-          });
-        }, 300);
-      },
-      deep: true
-    }
+    this._timerId = setTimeout(() => {
+      this.$emit('search', {
+        query: this.search.query,
+        searchBy: this.search.by
+      });
+    }, 300);
   }
-};
+}
 </script>
