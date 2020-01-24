@@ -1,5 +1,5 @@
 <template>
-  <div class="container" ref="poemBox">
+  <div v-if="isLoaded" class="container" ref="poemBox">
     <v-card min-width="300" min-height="300">
       <v-card-title>{{ poemData.title }}</v-card-title>
       <v-list-item-subtitle>{{ poemData.author.name }}</v-list-item-subtitle>
@@ -15,16 +15,18 @@
 export default {
   name: 'Poem',
 
-  data() {
-    return {};
-  },
-
   props: {
     poemData: Object
   },
 
   mounted() {
     this.getBoxHeight();
+  },
+
+  computed: {
+    isLoaded() {
+      return this.poemData.author !== undefined;
+    }
   },
 
   methods: {
