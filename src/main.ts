@@ -5,7 +5,7 @@ import store from './store/store';
 import vuetify from './plugins/vuetify';
 import VueResource from 'vue-resource';
 import wysiwyg from 'vue-wysiwyg';
-import Snackbar from './components/Snackbar';
+import Snackbar from './components/Snackbar.vue';
 
 Vue.config.productionTip = false;
 
