@@ -12,43 +12,37 @@
   </ul>
 </template>
 
-<script>
-export default {
-  name: 'Bars',
-  data() {
-    return {
-      bars: [],
-      barsLength: 3
-    };
-  },
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-  props: {
-    type: String,
-    poems: Array
-  },
+@Component({
+  name: 'Bars'
+})
+export default class Bars extends Vue {
+  @Prop(String) type: string;
+  @Prop(Array) poems: object[];
 
-  computed: {
-    poemBars() {
-      if (this.poems && this.poems.length <= this.barsLength) {
-        return this.poems;
-      } else {
-        return this.getRandomPoems(this.poems, this.barsLength);
-      }
-    }
-  },
+  bars = [];
+  barsLength = 3;
 
-  methods: {
-    getRandomPoems(arr, num) {
-      const bars = [];
-
-      while (bars.length < num) {
-        const el = arr[Math.floor(Math.random() * arr.length)];
-        bars.indexOf(el) === -1 ? bars.push(el) : null;
-      }
-      return bars;
+  get poemBars() {
+    if (this.poems && this.poems.length <= this.barsLength) {
+      return this.poems;
+    } else {
+      return this.getRandomPoems(this.poems, this.barsLength);
     }
   }
-};
+
+  getRandomPoems(arr, num) {
+    const bars = [];
+
+    while (bars.length < num) {
+      const el = arr[Math.floor(Math.random() * arr.length)];
+      bars.indexOf(el) === -1 ? bars.push(el) : null;
+    }
+    return bars;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
