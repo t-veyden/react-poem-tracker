@@ -1,5 +1,22 @@
 import Vue from 'vue';
 
+interface SinglePoem {
+  completed?: boolean;
+  in_progress?: boolean;
+  author?: {
+    name: string;
+    id: string;
+  };
+}
+
+interface Poems {
+  poems: object[];
+  poem: SinglePoem;
+  isAdded: boolean;
+  isDeleted: boolean;
+  isUpdated: boolean;
+}
+
 const poems = {
   namespaced: true,
 
@@ -12,31 +29,31 @@ const poems = {
   },
 
   getters: {
-    newPoemStatus(state) {
+    newPoemStatus(state: Poems) {
       return state.isAdded;
     },
 
-    completedPoems(state) {
-      return state.poems.filter(poem => poem.completed);
+    completedPoems(state: Poems) {
+      return state.poems.filter((poem: SinglePoem) => poem.completed);
     },
 
-    pendingPoems(state) {
-      return state.poems.filter(poem => !poem.completed);
+    pendingPoems(state: Poems) {
+      return state.poems.filter((poem: SinglePoem) => !poem.completed);
     },
 
-    currentPoems(state) {
-      return state.poems.filter(poem => poem.in_progress);
+    currentPoems(state: Poems) {
+      return state.poems.filter((poem: SinglePoem) => poem.in_progress);
     },
 
-    authorsList(state) {
-      return state.poems.map(poem => poem.author);
+    authorsList(state: Poems) {
+      return state.poems.map((poem: SinglePoem) => poem.author);
     },
 
-    auhtorID(state) {
-      return name =>
-        state.poems.reduce((acc, poem) => {
-          if (poem.author.name === name) {
-            acc = poem.author.id;
+    auhtorID(state: Poems) {
+      return (name: string) =>
+        state.poems.reduce((acc: string | null, poem: SinglePoem) => {
+          if (poem.author!.name === name) {
+            acc = poem.author!.id;
           }
           return acc;
         }, null);
@@ -44,27 +61,27 @@ const poems = {
   },
 
   mutations: {
-    getPoemsData(state, poems) {
+    getPoemsData(state: Poems, poems: object[]) {
       state.poems = poems;
     },
 
-    getSinglePoem(state, poem) {
+    getSinglePoem(state: Poems, poem: object) {
       state.poem = poem;
     },
 
-    addPoem(state) {
+    addPoem(state: Poems) {
       state.isAdded = true;
     },
 
-    deletePoem(state) {
+    deletePoem(state: Poems) {
       state.isDeleted = true;
     },
 
-    updatePoemInfo(state) {
+    updatePoemInfo(state: Poems) {
       state.isUpdated = true;
     },
 
-    clearMessage(state, target) {
+    clearMessage(state: Poems, target: string) {
       state[target] = false;
     }
   },
@@ -81,7 +98,7 @@ const poems = {
         });
     },
 
-    getSinglePoem({ commit }, id) {
+    getSinglePoem({ commit }, id: string) {
       Vue.http
         .get(`http://localhost:3000/poems/${id}`)
         .then(response => {
@@ -92,7 +109,7 @@ const poems = {
         });
     },
 
-    addPoem({ commit }, payload) {
+    addPoem({ commit }, payload: object) {
       Vue.http
         .post('http://localhost:3000/poems', payload)
         .then(response => response.json())
@@ -105,7 +122,7 @@ const poems = {
         });
     },
 
-    updatePoemStatus({ commit, dispatch }, payload) {
+    updatePoemStatus({ commit, dispatch }, payload: { p: object; id: string }) {
       console.log(payload);
       Vue.http
         .patch(`http://localhost:3000/poems/${payload.id}`, payload.p, {
@@ -121,7 +138,7 @@ const poems = {
         });
     },
 
-    updatePoemInfo({ commit }, payload) {
+    updatePoemInfo({ commit }, payload: { body: object; id: string }) {
       Vue.http
         .patch(`http://localhost:3000/poems/${payload.id}`, payload.body, {
           'Content-Type': 'application/json'
@@ -137,7 +154,7 @@ const poems = {
         });
     },
 
-    deletePoem({ commit }, id) {
+    deletePoem({ commit }, id: string) {
       Vue.http
         .delete(`http://localhost:3000/poems/${id}`)
         .then(response => response.json())
