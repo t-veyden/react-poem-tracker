@@ -10,38 +10,33 @@
   </v-snackbar>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { mapState } from 'vuex';
 
-export default {
+@Component({
   name: 'Snackbar',
-  computed: {
-    ...mapState({
-      snackbar(state) {
-        return state.ux.snackbar;
-      }
-    })
-  },
+  computed: mapState('ux', ['snackbar'])
+})
+export default class Snackbar extends Vue {
+  snackbar: object;
 
-  watch: {
-    'snackbar.snackState'(val) {
-      if (val) {
-        setTimeout(() => {
-          this.close();
-        }, 2000);
-      }
-    }
-  },
-
-  methods: {
-    close() {
-      this.$store.commit('ux/setSnackState', {
-        message: '',
-        snackState: false
-      });
+  @Watch('snackbar.snackState')
+  handler(val: boolean) {
+    if (val) {
+      setTimeout(() => {
+        this.close();
+      }, 2000);
     }
   }
-};
+
+  close() {
+    this.$store.commit('ux/setSnackState', {
+      message: '',
+      snackState: false
+    });
+  }
+}
 </script>
 
 <style lang="scss" scoped>
