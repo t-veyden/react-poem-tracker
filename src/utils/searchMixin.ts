@@ -1,26 +1,24 @@
-export default {
-  data() {
-    return {
-      search: "",
-      searchBy: "title",
-      dataStore: ""
-    };
-  },
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
-  computed: {
-    filteredPoems() {
-      return this[this.dataStore].filter(poem => {
-        return poem[this.searchBy]
-          .toLowerCase()
-          .includes(this.search.toLowerCase());
-      });
-    }
-  },
+@Component({
+  name: 'searchMixin'
+})
+export default class searchMixin extends Vue {
+  search: string = "";
+  searchBy: string = "title";
+  dataStore: string = "";
 
-  methods: {
-    findPoem({ query, searchBy }) {
-      this.search = query;
-      this.searchBy = searchBy;
-    }
+  get filteredPoems() {
+    return this[this.dataStore].filter((poem: object) => {
+      return poem[this.searchBy]
+        .toLowerCase()
+        .includes(this.search.toLowerCase());
+    });
+  }
+
+  findPoem({ query, searchBy }: {query: string, searchBy: string}) {
+    this.search = query;
+    this.searchBy = searchBy;
   }
 };
