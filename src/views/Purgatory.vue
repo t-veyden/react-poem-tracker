@@ -36,57 +36,47 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { mixins } from 'vue-class-component';
+import { Vue, Component } from 'vue-property-decorator';
+import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 import { searchMixin } from '../utils';
-import TSearch from '../components/Search';
+import TSearch from '../components/Search.vue';
 
-export default {
+@Component({
   name: 'Purgatory',
-
-  mixins: [searchMixin],
-
   components: {
     TSearch
-  },
-
-  data() {
-    return {
-      filters: [
-        { id: 'short', label: 'short ones' },
-        { id: 'sonnet', label: 'gimme sonnets' },
-        { id: 'shakespeare', label: 'shakespeare only' }
-      ],
-      randomPoems: null,
-      luckyEnabled: false
-    };
-  },
+  }
+})
+export default class Purgatory extends mixins(searchMixin) {
+  @MapVuex(mapGetters, 'poems', ['pendingPoems'])
+  filters = [
+    { id: 'short', label: 'short ones' },
+    { id: 'sonnet', label: 'gimme sonnets' },
+    { id: 'shakespeare', label: 'shakespeare only' }
+  ];
+  randomPoems = null;
+  luckyEnabled = false;
 
   created() {
     this.$store.dispatch('poems/getPoemsData');
     this.dataStore = 'pendingPoems';
-  },
-
-  computed: {
-    ...mapGetters('poems', ['pendingPoems'])
-  },
-
-  methods: {
-    getRandomPoem() {
-      this.randomPoems = [
-        this.filteredPoems[
-          Math.floor(Math.random() * this.filteredPoems.length)
-        ]
-      ];
-      this.luckyEnabled = true;
-    },
-
-    showAll() {
-      this.randomPoems = null;
-      this.luckyEnabled = false;
-    }
   }
-};
+
+  getRandomPoem() {
+    this.randomPoems = [
+      this.filteredPoems[Math.floor(Math.random() * this.filteredPoems.length)]
+    ];
+    this.luckyEnabled = true;
+  }
+
+  showAll() {
+    this.randomPoems = null;
+    this.luckyEnabled = false;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
