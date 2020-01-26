@@ -1,3 +1,12 @@
+interface Snackbar {
+  message: string;
+  snackState: boolean;
+}
+
+interface UxState {
+  snackbar: Snackbar;
+}
+
 const ux = {
   namespaced: true,
 
@@ -9,7 +18,7 @@ const ux = {
   },
 
   mutations: {
-    setSnackState(state, { message, snackState }) {
+    setSnackState(state: UxState, { message, snackState }: Snackbar) {
       state.snackbar.message = message;
       state.snackbar.snackState = snackState;
     }
