@@ -23,12 +23,13 @@ export default class Search extends Vue {
     query: '',
     by: 'title'
   };
+  _timerId: number = 0;
 
   @Watch('search', { deep: true })
   handler() {
     clearTimeout(this._timerId);
 
-    this._timerId = setTimeout(() => {
+    this._timerId = window.setTimeout(() => {
       this.$emit('search', {
         query: this.search.query,
         searchBy: this.search.by
