@@ -8,18 +8,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Section',
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-  props: {
-    sectionTitle: String,
-    typeOfBar: {
-      type: Boolean,
-      default: false
-    }
-  }
-};
+@Component({
+  name: 'Section'
+})
+export default class Section extends Vue {
+  @Prop(String) sectionTitle: string;
+  @Prop({ type: Boolean, default: false }) typeOfBar: boolean;
+}
 </script>
 
 <style lang="scss" scoped>
