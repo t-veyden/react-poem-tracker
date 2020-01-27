@@ -19,8 +19,8 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
   name: 'Bars'
 })
 export default class Bars extends Vue {
-  @Prop(String) type: string;
-  @Prop(Array) poems: object[];
+  @Prop(String) type: string | undefined;
+  @Prop(Array) poems!: object[];
 
   bars = [];
   barsLength = 3;
@@ -33,7 +33,7 @@ export default class Bars extends Vue {
     }
   }
 
-  getRandomPoems(arr, num) {
+  getRandomPoems(arr: object[], num: number) {
     const bars = [];
 
     while (bars.length < num) {
