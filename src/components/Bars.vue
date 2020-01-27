@@ -19,7 +19,6 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
   name: 'Bars'
 })
 export default class Bars extends Vue {
-  @Prop(String) type: string | undefined;
   @Prop(Array) poems!: object[];
 
   bars = [];

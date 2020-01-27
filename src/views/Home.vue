@@ -25,10 +25,10 @@
     </t-section>
 
     <t-section class="bar-section" sectionTitle="purgatory" typeOfBar>
-      <t-bars type="purgatory" :poems="pendingPoems" />
+      <t-bars :poems="pendingPoems" />
     </t-section>
     <t-section class="bar-section" sectionTitle="completed" typeOfBar>
-      <t-bars type="completed" :poems="completedPoems" />
+      <t-bars :poems="completedPoems" />
     </t-section>
 
     <!-- <h3>widget</h3>
