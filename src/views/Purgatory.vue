@@ -57,8 +57,8 @@ export default class Purgatory extends mixins(searchMixin) {
     { id: 'sonnet', label: 'gimme sonnets' },
     { id: 'shakespeare', label: 'shakespeare only' }
   ];
-  randomPoems = null;
-  luckyEnabled = false;
+  randomPoems: object[] | null = null;
+  luckyEnabled: boolean = false;
 
   created() {
     this.$store.dispatch('poems/getPoemsData');
