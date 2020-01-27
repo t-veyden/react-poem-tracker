@@ -8,15 +8,17 @@
 </template>
 
 <script>
+import { Vue, Component } from 'vue-property-decorator';
+import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 
-export default {
+@Component({
+  name: 'AuthorsList'
+})
+export default class AuthorsList extends Vue {
+  @MapVuex(mapGetters, 'poems', ['authorsList'])
   created() {
     this.$store.dispatch('poems/getPoemsData');
-  },
-
-  computed: {
-    ...mapGetters('poems', ['authorsList'])
   }
-};
+}
 </script>
