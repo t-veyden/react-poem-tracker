@@ -12,18 +12,13 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator';
-import MapVuex from '../customDecorators';
 import { mapState } from 'vuex';
 
 @Component({
-  name: 'Snackbar'
+  name: 'Snackbar',
+  computed: mapState('ux', ['snackbar'])
 })
 export default class Snackbar extends Vue {
-  @MapVuex(mapState, 'ux', {
-    snackbar(state) {
-      return state.snackbar;
-    }
-  })
   @Watch('snackbar.snackState')
   handler(val: boolean) {
     if (val) {
