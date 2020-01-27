@@ -11,30 +11,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
-import TPoem from '../components/Poem';
-import TActions from '../components/PoemActions';
+import TPoem from '../components/Poem.vue';
+import TActions from '../components/PoemActions.vue';
 
-export default {
+@Component({
   name: 'Poem',
-  data() {
-    return {
-      id: this.$route.params.id
-    };
-  },
-
   components: {
     TPoem,
     TActions
   },
+  computed: mapState('poems', ['poem'])
+})
+export default class Poem extends Vue {
+  id: string = '';
 
   created() {
+    this.id = this.$route.params.id;
     this.$store.dispatch('poems/getSinglePoem', this.id);
-  },
-
-  computed: {
-    ...mapState('poems', ['poem'])
   }
-};
+}
 </script>
