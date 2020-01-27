@@ -49,7 +49,7 @@ const poems = {
       return state.poems.map((poem: SinglePoem) => poem.author);
     },
 
-    auhtorID(state: Poems) {
+    authorID(state: Poems) {
       return (name: string) =>
         state.poems.reduce((acc: string | null, poem: SinglePoem) => {
           if (poem.author!.name === name) {

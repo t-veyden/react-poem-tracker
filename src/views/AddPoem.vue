@@ -48,7 +48,7 @@ import { defineID } from '../utils/helpers';
 @Component({
   name: 'AddPoem',
   computed: {
-    ...mapGetters('poems', ['auhtorID'])
+    ...mapGetters('poems', ['authorID'])
   }
 })
 export default class AddPoem extends mixins(uxMixin, textMixin) {
