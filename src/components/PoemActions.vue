@@ -22,79 +22,65 @@
   </v-card-actions>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
 import { uxMixin } from '../utils/index';
 
-export default {
-  name: 'PoemActions',
+@Component({
+  name: 'PoemActions'
+})
+export default class PoemActions extends mixins(uxMixin) {
+  @Prop({ type: String, required: true }) id!: string;
+  @Prop() q!: boolean | null;
+  @Prop(Boolean) c!: boolean;
 
-  props: {
-    id: {
-      type: String,
-      required: true
-    },
-    q: {
-      type: Boolean || null
-    },
-    c: {
-      type: Boolean
-    }
-  },
+  snackbarMessage: string = 'Tis gone';
 
-  mixins: [uxMixin],
-
-  data() {
-    return {
-      snackbarMessage: 'Tis gone'
+  toggleQ() {
+    const payload = {
+      completed: this.c,
+      in_progress: !this.q
     };
-  },
-
-  methods: {
-    toggleQ() {
-      const payload = {
-        completed: this.c,
-        in_progress: !this.q
-      };
-      this.updateStatus(payload);
-    },
-
-    toggleCompletion() {
-      const payload = this.c
-        ? {
-            completed: false,
-            in_progress: false
-          }
-        : {
-            completed: true,
-            in_progress: null
-          };
-
-      this.updateStatus(payload);
-    },
-
-    callConfirm() {
-      const confirmDelete = confirm("You're sure you want to delete this?");
-      if (confirmDelete) this.deletePoem();
-    },
-
-    updateStatus(payload) {
-      this.$store.dispatch('poems/updatePoemStatus', {
-        id: this.id,
-        p: payload
-      });
-    },
-
-    deletePoem() {
-      this.$store.dispatch('poems/deletePoem', this.id);
-      this.showMessage(this.snackbarMessage);
-      setTimeout(() => {
-        this.$router.go(-1);
-      }, 2000);
-    },
-
-    redirectToEdit() {
-      this.$router.push(`/edit/${this.id}`)
-    }
+    this.updateStatus(payload);
   }
-};
+
+  toggleCompletion() {
+    const payload = this.c
+      ? {
+          completed: false,
+          in_progress: false
+        }
+      : {
+          completed: true,
+          in_progress: null
+        };
+
+    this.updateStatus(payload);
+  }
+
+  callConfirm() {
+    const confirmDelete = confirm("You're sure you want to delete this?");
+    if (confirmDelete) this.deletePoem();
+  }
+
+  updateStatus(payload: object) {
+    this.$store.dispatch('poems/updatePoemStatus', {
+      id: this.id,
+      p: payload
+    });
+  }
+
+  deletePoem() {
+    this.$store.dispatch('poems/deletePoem', this.id);
+    this.showMessage(this.snackbarMessage);
+    setTimeout(() => {
+      this.$router.go(-1);
+    }, 2000);
+  }
+
+  redirectToEdit() {
+    this.$router.push(`/edit/${this.id}`);
+  }
+}
 </script>
