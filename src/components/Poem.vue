@@ -14,11 +14,15 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
+interface singlePoem {
+  author: object;
+}
+
 @Component({
   name: 'Poem'
 })
 export default class Poem extends Vue {
-  @Prop(Object) poemData: object;
+  @Prop(Object) poemData!: singlePoem;
 
   mounted() {
     this.getBoxHeight();
