@@ -15,8 +15,8 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
   name: 'Section'
 })
 export default class Section extends Vue {
-  @Prop(String) sectionTitle: string;
-  @Prop({ type: Boolean, default: false }) typeOfBar: boolean;
+  @Prop(String) sectionTitle!: string;
+  @Prop({ type: Boolean, default: false }) typeOfBar!: boolean;
 }
 </script>
 
