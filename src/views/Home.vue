@@ -38,15 +38,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import MapVuex from '../customDecorators';
 import { mapState, mapGetters } from 'vuex';
-import TSection from '../components/Section';
-import TBars from '../components/Bars';
-import TPoem from '../components/Poem';
-import TActions from '../components/PoemActions';
-import TWidget from '../components/Widget';
+import TSection from '../components/Section.vue';
+import TBars from '../components/Bars.vue';
+import TPoem from '../components/Poem.vue';
+import TActions from '../components/PoemActions.vue';
+import TWidget from '../components/Widget.vue';
 
-export default {
+@Component({
+  name: 'Home',
   components: {
     TSection,
     TPoem,
@@ -54,31 +57,23 @@ export default {
     TBars,
     TWidget
   },
-
-  data() {
-    return {
-      currIdx: 0,
-      heights: []
-    };
-  },
+  computed: mapState('poems', ['poems'])
+})
+export default class Home extends Vue {
+  @MapVuex(mapGetters, 'poems', ['pendingPoems', 'currentPoems', 'completedPoems'])
+  currIdx: number = 0;
+  heights: number[] = [];
 
   created() {
     this.$store.dispatch('poems/getPoemsData');
-  },
+  }
 
-  computed: {
-    ...mapState('poems', ['poems']),
-    ...mapGetters('poems', ['pendingPoems', 'currentPoems', 'completedPoems']),
+  get boxHeight() {
+    return this.heights.length ? this.heights[this.currIdx] + 100 : '350';
+  }
 
-    boxHeight() {
-      return this.heights.length ? this.heights[this.currIdx] + 100 : '350';
-    }
-  },
-
-  methods: {
-    updateHeight(evt) {
-      this.heights.splice(this.currIdx, 0, evt);
-    }
+  updateHeight(evt: number) {
+    this.heights.splice(this.currIdx, 0, evt);
   }
 };
 </script>
