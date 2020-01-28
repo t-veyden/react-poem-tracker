@@ -13,27 +13,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 import { searchMixin } from '../utils';
-import TSearch from '../components/Search';
+import TSearch from '../components/Search.vue';
 
-export default {
-  name: 'Completed',
-
-  mixins: [searchMixin],
-
+@Component({
+  name: 'Coompleted',
   components: {
     TSearch
-  },
-
+  }
+})
+export default class Completed extends mixins(searchMixin) {
+  @MapVuex(mapGetters, 'poems', ['completedPoems'])
   created() {
     this.$store.dispatch('poems/getPoemsData');
     this.dataStore = 'completedPoems';
-  },
-
-  computed: {
-    ...mapGetters('poems', ['completedPoems'])
   }
-};
+}
 </script>
