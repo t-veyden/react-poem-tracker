@@ -1,12 +1,14 @@
 import Vue from 'vue';
 
+interface SingleAuthor {
+  id: string;
+  name: string;
+}
+
 interface SinglePoem {
   completed?: boolean;
   in_progress?: boolean;
-  author?: {
-    name: string;
-    id: string;
-  };
+  author?: SingleAuthor;
 }
 
 interface Poems {
@@ -46,7 +48,14 @@ const poems = {
     },
 
     authorsList(state: Poems) {
-      return state.poems.map((poem: SinglePoem) => poem.author);
+      const ids = new Set(state.poems.map((poem: SinglePoem) => poem.author!.id));
+      const authors = state.poems.map((poem: SinglePoem) => poem.author);
+
+      const authorsList: object[] = [];
+      ids.forEach(id => {
+       authorsList.push(authors.find((author) => author.id === id))
+      })
+      return authorsList;
     },
 
     authorID(state: Poems) {
