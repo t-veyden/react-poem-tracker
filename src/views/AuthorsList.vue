@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li v-for="(author, idx) in authorsList" :key="idx">
-      <!-- <router-link>{{ author }}</router-link> -->
+    <li v-for="author in authorsList" :key="author.id">
+      <router-link :to="`/authors/${author.id}`">{{ author.name }}</router-link>
       {{ author.name }}
     </li>
   </ul>
