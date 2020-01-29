@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-app-bar class="top-bar" app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="headline text-uppercase mr-2">
         <router-link class="home-link" to="/">
           <span>Poetry</span>
@@ -12,6 +13,16 @@
         <v-icon>mdi-diving-helmet</v-icon>
       </v-btn>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-list nav dense>
+        <v-list-item-group active-class="deep-purple--text text--accent-4">
+          <v-list-item v-for="(item, key) in navItems" :key="key">
+            <router-link :to="item.link">{{ item.title }}</router-link>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-content>
       <v-container fluid full-height>
@@ -49,9 +60,15 @@
 <script>
 export default {
   name: 'App',
-  data: () => ({
-    //
-  })
+  data: () => {
+    return {
+      drawer: false,
+      navItems: [
+        { title: 'All authors', link: '/authors-list' },
+        { title: 'Purgatory', link: '/purgatory' }
+      ]
+    };
+  }
 };
 </script>
 
