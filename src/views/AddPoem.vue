@@ -14,6 +14,13 @@
         label="Author"
         :rules="rules"
       />
+      <v-checkbox
+        v-if="isAuthorized"
+        v-model="ownPoem"
+        label="That would be me"
+        @change="setAuthor"
+      />
+
       <v-autocomplete
         :items="langs"
         label="Language"
@@ -39,19 +46,19 @@
 </template>
 
 <script>
-import { mixins } from 'vue-class-component'
+import { mixins } from 'vue-class-component';
 import { Vue, Component } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
+import MapVuex from '../customDecorators';
+import { mapGetters, mapState } from 'vuex';
 import { uxMixin, textMixin } from '../utils';
 import { defineID } from '../utils/helpers';
 
 @Component({
   name: 'AddPoem',
-  computed: {
-    ...mapGetters('poems', ['authorID'])
-  }
+  computed: mapState('admin', ['isAuthorized'])
 })
 export default class AddPoem extends mixins(uxMixin, textMixin) {
+  @MapVuex(mapGetters, 'poems', ['authorID'])
   newPoem = {
     author: {
       name: '',
@@ -63,11 +70,16 @@ export default class AddPoem extends mixins(uxMixin, textMixin) {
     in_progress: false,
     lang: 'English'
   };
+  ownPoem = false;
   status = 'pending';
   completionStates = ['current', 'pending', 'completed'];
   langs = ['English', 'French', 'Spanish'];
   snackbarMessage = 'You just added a new poem';
   rules = [v => !!v || "This field shouldn't be empty"];
+  stubAuthor = {
+    name: 'me',
+    id: 'tv23424h'
+  };
 
   created() {
     this.$store.dispatch('poems/getPoemsData');
@@ -75,6 +87,14 @@ export default class AddPoem extends mixins(uxMixin, textMixin) {
 
   updateID() {
     this.newPoem.author.id = defineID(this.newPoem.author.name);
+  }
+
+  setAuthor() {
+    for (let prop in this.newPoem.author) {
+      this.ownPoem
+        ? (this.newPoem.author[prop] = this.stubAuthor[prop])
+        : (this.newPoem.author[prop] = '');
+    }
   }
 
   preparePoem() {

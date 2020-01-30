@@ -4,7 +4,8 @@ const admin = {
   namespaced: true,
 
   state: {
-    id: null
+    id: null,
+    isAuthorized: true
   },
 
   getters: {},
