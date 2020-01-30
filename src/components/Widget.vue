@@ -14,6 +14,14 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
+interface SinglePoem {
+  completed?: boolean;
+}
+
+interface SingleAuthor {
+  name: string;
+}
+
 @Component({
   name: 'Widget'
 })
@@ -21,7 +29,7 @@ export default class Widget extends Vue {
   @Prop(Array) poems!: object[];
 
   get numOfCompleted() {
-    return this.poems.filter(poem => poem.status === 'completed').length;
+    return this.poems.filter((poem: SinglePoem ) => poem.completed).length;
   }
 
   get usedLangs() {
@@ -29,22 +37,24 @@ export default class Widget extends Vue {
   }
 
   get favPoet() {
-    const sortedPoets = this.countUniqueItems(this.getArrOfValues('author'));
-    const fav = Object.values(sortedPoets).sort((a, b) => (a < b ? 1 : -1))[0];
-    return Object.keys(sortedPoets).find(key => sortedPoets[key] === fav);
+    const poets = this.countUniqueItems(this.getArrOfValues('author'));
+    const maxCount = Math.max(...Object.values(poets));
+    const fav = Object.keys(poets).find(key => poets[key] === maxCount);
+    return fav;
   }
 
-  countUniqueItems(arr) {
-    return arr.reduce((obj, item) => {
-      if (!obj[item]) {
-        obj[item] = 0;
+  countUniqueItems(arr: string[] | object[]): object {
+    return arr.reduce((acc: object, item: string | SingleAuthor) => {
+      const key = item instanceof Object ? item.name : item;
+      if (!acc[key]) {
+        acc[key] = 0;
       }
-      obj[item]++;
-      return obj;
+      acc[key]++;
+      return acc;
     }, {});
   }
 
-  getArrOfValues(key) {
+  getArrOfValues(key: string) {
     return this.poems.map(poem => poem[key]);
   }
 }
