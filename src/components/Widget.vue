@@ -1,6 +1,7 @@
 <template>
-  <v-sheet>
+  <v-sheet style="text-align: center;">
     <p>You have {{ poems.length }} poems in total</p>
+    <!-- mb should be a vuex prop -->
     <p>{{ numOfCompleted }} of them are completed</p>
     <hr />
     <p>In case you wanted to know:</p>
@@ -8,11 +9,14 @@
       {{ num }} of them {{ num > 1 ? 'are' : 'is' }} in {{ lang }}
     </p>
     <p>Fav: {{ favPoet }} (but this is not certain)</p>
+    <h3>Badges:</h3>
+    <t-badges :badges="badges" />
   </v-sheet>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import TBadges from './Badges.vue';
 
 interface SinglePoem {
   completed?: boolean;
@@ -23,13 +27,17 @@ interface SingleAuthor {
 }
 
 @Component({
-  name: 'Widget'
+  name: 'Widget',
+  components: {
+    TBadges
+  }
 })
 export default class Widget extends Vue {
   @Prop(Array) poems!: object[];
+  badges: object[] = [];
 
   get numOfCompleted() {
-    return this.poems.filter((poem: SinglePoem ) => poem.completed).length;
+    return this.poems.filter((poem: SinglePoem) => poem.completed).length;
   }
 
   get usedLangs() {
