@@ -11,48 +11,43 @@
   </v-sheet>
 </template>
 
-<script>
-export default {
-  name: 'Widget',
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-  props: {
-    poems: Array
-  },
+@Component({
+  name: 'Widget'
+})
+export default class Widget extends Vue {
+  @Prop(Array) poems!: object[];
 
-  computed: {
-    numOfCompleted() {
-      return this.poems.filter(poem => poem.status === 'completed').length;
-    },
-
-    usedLangs() {
-      return this.countUniqueItems(this.getArrOfValues('lang'));
-    },
-
-    favPoet() {
-      const sortedPoets = this.countUniqueItems(this.getArrOfValues('author'));
-      const fav = Object.values(sortedPoets).sort((a, b) =>
-        a < b ? 1 : -1
-      )[0];
-      return Object.keys(sortedPoets).find(key => sortedPoets[key] === fav);
-    }
-  },
-
-  methods: {
-    countUniqueItems(arr) {
-      return arr.reduce((obj, item) => {
-        if (!obj[item]) {
-          obj[item] = 0;
-        }
-        obj[item]++;
-        return obj;
-      }, {});
-    },
-
-    getArrOfValues(key) {
-      return this.poems.map(poem => poem[key]);
-    }
+  get numOfCompleted() {
+    return this.poems.filter(poem => poem.status === 'completed').length;
   }
-};
+
+  get usedLangs() {
+    return this.countUniqueItems(this.getArrOfValues('lang'));
+  }
+
+  get favPoet() {
+    const sortedPoets = this.countUniqueItems(this.getArrOfValues('author'));
+    const fav = Object.values(sortedPoets).sort((a, b) => (a < b ? 1 : -1))[0];
+    return Object.keys(sortedPoets).find(key => sortedPoets[key] === fav);
+  }
+
+  countUniqueItems(arr) {
+    return arr.reduce((obj, item) => {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+  }
+
+  getArrOfValues(key) {
+    return this.poems.map(poem => poem[key]);
+  }
+}
 </script>
 
 <style scoped></style>
