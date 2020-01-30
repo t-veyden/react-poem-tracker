@@ -65,6 +65,7 @@ export default {
       drawer: false,
       navItems: [
         { title: 'All authors', link: '/authors-list' },
+        { title: 'Dashboard', link: '/dashboard' },
         { title: 'Purgatory', link: '/purgatory' }
       ]
     };
