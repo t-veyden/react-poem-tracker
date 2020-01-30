@@ -30,11 +30,6 @@
     <t-section class="bar-section" sectionTitle="completed" typeOfBar>
       <t-bars :poems="completedPoems" />
     </t-section>
-
-    <!-- <h3>widget</h3>
-    <aside>
-      <t-widget :poems="poems"/>
-    </aside> -->
   </div>
 </template>
 
@@ -46,7 +41,6 @@ import TSection from '../components/Section.vue';
 import TBars from '../components/Bars.vue';
 import TPoem from '../components/Poem.vue';
 import TActions from '../components/PoemActions.vue';
-import TWidget from '../components/Widget.vue';
 
 @Component({
   name: 'Home',
@@ -54,8 +48,7 @@ import TWidget from '../components/Widget.vue';
     TSection,
     TPoem,
     TActions,
-    TBars,
-    TWidget
+    TBars
   },
   computed: mapState('poems', ['poems'])
 })
