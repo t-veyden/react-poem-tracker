@@ -30,8 +30,8 @@ interface SinglePoem {
 })
 export default class Author extends Vue {
   @MapVuex(mapGetters, 'poems', ['authorsList'])
-  authorsList!: () => SingleAuthor[];
-  poems!: () => SinglePoem[];
+  authorsList!: SingleAuthor[]
+  poems!: SinglePoem[];
   id: string = '';
 
   created() {
