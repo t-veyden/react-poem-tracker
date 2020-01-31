@@ -103,22 +103,11 @@ const poems = {
   },
 
   actions: {
-    getPoemsData({ commit }) {
+    getPoemsData({ commit }, path: string = 'poems') {
       Vue.http
-        .get('http://localhost:3000/poems')
+        .get(`http://localhost:3000/${path}`)
         .then(response => {
           commit('getPoemsData', response.body);
-        })
-        .catch(error => {
-          console.log(error.statusText);
-        });
-    },
-
-    getOwnPoems({ commit }) {
-      Vue.http
-        .get('http://localhost:3000/own_poems')
-        .then(response => {
-          commit('getOwnPoems', response.body);
         })
         .catch(error => {
           console.log(error.statusText);

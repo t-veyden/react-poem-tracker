@@ -51,8 +51,8 @@ export default class Author extends Vue {
     this.id = this.$route.params.id;
     this.ownPage = this.id === this.stubAuthor.id;
     this.pageType = this.ownPage ? 'personal' : 'general';
-    const fn = this.ownPage ? 'getOwnPoems' : 'getPoemsData';
-    this.$store.dispatch(`poems/${fn}`);
+    const path = this.ownPage ? 'own_poems' : 'poems';
+    this.$store.dispatch('poems/getPoemsData', path);
   }
 
   get currentAuthor() {
