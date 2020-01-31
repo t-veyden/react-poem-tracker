@@ -33,7 +33,7 @@
     <t-snackbar />
 
     <v-footer app>
-      <span>&copy; OneManBand 2019</span>
+      <span>&copy; One Man Band</span>
     </v-footer>
 
     <v-bottom-navigation app class="bottom-nav">
