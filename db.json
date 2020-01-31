@@ -302,6 +302,23 @@
       "id": "65756567"
     }
   ],
+  "own_poems": [
+    {
+      "author": {
+        "name": "me",
+        "id": "tv23424h"
+      },
+      "title": "some title",
+      "text": [
+        "some text",
+        "text"
+      ],
+      "completed": false,
+      "in_progress": false,
+      "lang": "english",
+      "id": "6575dfgd6567"
+    }
+  ],
   "users": [
     {
       "id": "sdskllj",

@@ -4,7 +4,14 @@
     <p>{{ poemCounter }} in total</p>
     <ul>
       <li v-for="poem in authorsWorks" :key="poem.id">
-        <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
+        <router-link
+          :to="{
+            name: 'poem',
+            params: { id: poem.id },
+            query: { type: pageType }
+          }"
+          >{{ poem.title }}
+        </router-link>
       </li>
     </ul>
   </div>
@@ -30,27 +37,43 @@ interface SinglePoem {
 })
 export default class Author extends Vue {
   @MapVuex(mapGetters, 'poems', ['authorsList'])
-  authorsList!: SingleAuthor[]
+  authorsList!: SingleAuthor[];
   poems!: SinglePoem[];
   id: string = '';
+  stubAuthor: SingleAuthor = {
+    name: 'me',
+    id: 'tv23424h'
+  };
+  ownPage = false;
+  pageType = 'general';
 
   created() {
     this.id = this.$route.params.id;
-    this.$store.dispatch('poems/getPoemsData');
+    this.ownPage = this.id === this.stubAuthor.id;
+    this.pageType = this.ownPage ? 'personal' : 'general';
+    const fn = this.ownPage ? 'getOwnPoems' : 'getPoemsData';
+    this.$store.dispatch(`poems/${fn}`);
   }
 
   get currentAuthor() {
-    return this.authorsList.find(
-      (author: SingleAuthor) => author.id === this.id
-    );
+    if (!this.ownPage) {
+      return this.authorsList.find(
+        (author: SingleAuthor) => author.id === this.id
+      );
+    } else return this.stubAuthor;
   }
 
   get authorsWorks() {
-    return this.poems.filter((poem: SinglePoem) => poem.author.id === this.id);
+    if (!this.ownPage) {
+      return this.poems.filter(
+        (poem: SinglePoem) => poem.author.id === this.id
+      );
+    } else return this.poems;
   }
 
   get poemCounter() {
-    return this.authorsWorks.length;
+    const source = this.ownPage ? 'poems' : 'authorsWorks';
+    return this[source].length;
   }
 }
 </script>

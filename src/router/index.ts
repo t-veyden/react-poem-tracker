@@ -36,7 +36,8 @@ const routes = [
   {
     path: '/poem/:id',
     name: 'poem',
-    component: () => import('../views/Poem.vue')
+    component: () => import('../views/Poem.vue'),
+    props: true
   },
   {
     path: '/authors-list',

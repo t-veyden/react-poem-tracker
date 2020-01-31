@@ -30,7 +30,8 @@ export default class Poem extends Vue {
 
   created() {
     this.id = this.$route.params.id;
-    this.$store.dispatch('poems/getSinglePoem', this.id);
+    const path = this.$route.query.type === 'personal' ? `own_poems/${this.id}` : `poems/${this.id}`
+    this.$store.dispatch('poems/getSinglePoem', path);
   }
 }
 </script>

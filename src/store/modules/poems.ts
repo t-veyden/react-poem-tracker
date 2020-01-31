@@ -48,13 +48,15 @@ const poems = {
     },
 
     authorsList(state: Poems) {
-      const ids = new Set(state.poems.map((poem: SinglePoem) => poem.author!.id));
+      const ids = new Set(
+        state.poems.map((poem: SinglePoem) => poem.author!.id)
+      );
       const authors = state.poems.map((poem: SinglePoem) => poem.author);
 
       const authorsList: object[] = [];
       ids.forEach(id => {
-       authorsList.push(authors.find((author) => author.id === id))
-      })
+        authorsList.push(authors.find(author => author.id === id));
+      });
       return authorsList;
     },
 
@@ -71,6 +73,11 @@ const poems = {
 
   mutations: {
     getPoemsData(state: Poems, poems: object[]) {
+      state.poems = poems;
+    },
+
+    getOwnPoems(state: Poems, poems: object[]) {
+      // why get, if it all looks like set
       state.poems = poems;
     },
 
@@ -107,9 +114,20 @@ const poems = {
         });
     },
 
-    getSinglePoem({ commit }, id: string) {
+    getOwnPoems({ commit }) {
       Vue.http
-        .get(`http://localhost:3000/poems/${id}`)
+        .get('http://localhost:3000/own_poems')
+        .then(response => {
+          commit('getOwnPoems', response.body);
+        })
+        .catch(error => {
+          console.log(error.statusText);
+        });
+    },
+
+    getSinglePoem({ commit }, path: string) {
+      Vue.http
+        .get(`http://localhost:3000/${path}`)
         .then(response => {
           commit('getSinglePoem', response.body);
         })

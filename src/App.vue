@@ -26,7 +26,7 @@
 
     <v-content>
       <v-container fluid full-height>
-        <router-view />
+        <router-view :key="$route.fullPath"/>
       </v-container>
     </v-content>
 
@@ -66,7 +66,8 @@ export default {
       navItems: [
         { title: 'All authors', link: '/authors-list' },
         { title: 'Dashboard', link: '/dashboard' },
-        { title: 'Purgatory', link: '/purgatory' }
+        { title: 'Frost', link: '/authors/4534535' },
+        { title: 'Mine', link: '/authors/tv23424h' }
       ]
     };
   }
