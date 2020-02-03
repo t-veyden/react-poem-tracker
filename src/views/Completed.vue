@@ -22,7 +22,7 @@ import { searchMixin } from '../utils';
 import TSearch from '../components/Search.vue';
 
 @Component({
-  name: 'Coompleted',
+  name: 'Completed',
   components: {
     TSearch
   }
