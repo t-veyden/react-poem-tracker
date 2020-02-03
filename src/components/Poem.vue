@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 interface singlePoem {
   author: object;
@@ -23,17 +23,24 @@ interface singlePoem {
 })
 export default class Poem extends Vue {
   @Prop(Object) poemData!: singlePoem;
-
-  mounted() {
-    this.getBoxHeight();
+  // TODO shouldn't be manipulating or accessing DOM at all
+  @Watch('poemData.text', { immediate: true, deep: true })
+  handler() {
+    setTimeout(() => {
+      if (this.$refs.poemBox !== undefined) {
+        this.height = this.$refs.poemBox.clientHeight;
+        this.getBoxHeight();
+      }
+    }, 0);
   }
+  height = 0;
 
   get isLoaded() {
     return this.poemData.author !== undefined;
   }
 
   getBoxHeight() {
-    this.$emit('assignHeight', this.$refs.poemBox.clientHeight);
+    this.$emit('assignHeight', this.height);
   }
 }
 </script>
