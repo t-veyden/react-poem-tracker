@@ -107,7 +107,8 @@ export default class EditPoem extends mixins(uxMixin, textMixin) {
 
   created() {
     this.id = this.$route.params.id;
-    this.$store.dispatch('poems/getSinglePoem', `poems/${this.id}`);
+    const path = this.$route.query.type === 'personal' ? `own_poems/${this.id}` : `poems/${this.id}`;
+    this.$store.dispatch('poems/getSinglePoem', path);
   }
 
   updateID() {
@@ -128,9 +129,10 @@ export default class EditPoem extends mixins(uxMixin, textMixin) {
   }
 
   submitPoem() {
+    const path = this.$route.query.type === 'personal' ? `own_poems/${this.id}` : `poems/${this.id}`;
     if (this.$refs.editForm.validate() && this.updPoem.text) {
       this.$store.dispatch('poems/updatePoemInfo', {
-        id: this.id,
+        path: path,
         body: this.updPoem
       });
 

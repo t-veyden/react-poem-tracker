@@ -3,7 +3,9 @@
     <h1>This is a single poem page</h1>
     <t-poem :poemData="poem" />
     <t-actions
+      v-if="poem.author"
       :id="id"
+      :authorId="poem.author.id"
       :q="poem.in_progress"
       :c="poem.completed"
       class="pl-12"
@@ -30,7 +32,11 @@ export default class Poem extends Vue {
 
   created() {
     this.id = this.$route.params.id;
-    const path = this.$route.query.type === 'personal' ? `own_poems/${this.id}` : `poems/${this.id}`
+    const path =
+      this.$route.query.type === 'personal'
+        ? `own_poems/${this.id}`
+        : `poems/${this.id}`;
+
     this.$store.dispatch('poems/getSinglePoem', path);
   }
 }

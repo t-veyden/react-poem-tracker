@@ -27,15 +27,33 @@ import { Component, Prop } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import { uxMixin } from '../utils/index';
 
+interface SingleAuthor {
+  id: string;
+  name: string;
+}
+
 @Component({
   name: 'PoemActions'
 })
 export default class PoemActions extends mixins(uxMixin) {
   @Prop({ type: String, required: true }) id!: string;
+  @Prop({ type: String, required: true }) authorId!: string;
   @Prop() q!: boolean | null;
   @Prop(Boolean) c!: boolean;
 
   snackbarMessage: string = 'Tis gone';
+  stubAuthor: SingleAuthor = {
+    name: 'me',
+    id: 'tv23424h'
+  };
+
+  get isOwn() {
+    return this.authorId === this.stubAuthor.id;
+  }
+
+  get pageType() {
+    return this.isOwn ? 'personal' : 'general';
+  }
 
   toggleQ() {
     const payload = {
@@ -72,7 +90,9 @@ export default class PoemActions extends mixins(uxMixin) {
   }
 
   deletePoem() {
-    this.$store.dispatch('poems/deletePoem', this.id);
+    const path = this.isOwn ? `own_poems/${this.id}` : `poems/${this.id}`;
+    this.$store.dispatch('poems/deletePoem', path);
+
     this.showMessage(this.snackbarMessage);
     setTimeout(() => {
       this.$router.go(-1);
@@ -80,7 +100,10 @@ export default class PoemActions extends mixins(uxMixin) {
   }
 
   redirectToEdit() {
-    this.$router.push(`/edit/${this.id}`);
+    this.$router.push({
+      path: `/edit/${this.id}`,
+      query: { type: this.pageType }
+    });
   }
 }
 </script>

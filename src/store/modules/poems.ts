@@ -154,9 +154,9 @@ const poems = {
         });
     },
 
-    updatePoemInfo({ commit }, payload: { body: object; id: string }) {
+    updatePoemInfo({ commit }, payload: { body: object; path: string }) {
       Vue.http
-        .patch(`http://localhost:3000/poems/${payload.id}`, payload.body, {
+        .patch(`http://localhost:3000/${payload.path}`, payload.body, {
           'Content-Type': 'application/json'
         })
         .then(response => {
@@ -170,9 +170,9 @@ const poems = {
         });
     },
 
-    deletePoem({ commit }, id: string) {
+    deletePoem({ commit }, path: string) {
       Vue.http
-        .delete(`http://localhost:3000/poems/${id}`)
+        .delete(`http://localhost:3000/${path}`)
         .then(response => response.json())
         .then(response => {
           commit('deletePoem');
