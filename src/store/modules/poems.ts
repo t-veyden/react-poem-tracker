@@ -125,9 +125,9 @@ const poems = {
         });
     },
 
-    addPoem({ commit }, payload: object) {
+    addPoem({ commit }, payload: { path: string; body: object }) {
       Vue.http
-        .post('http://localhost:3000/poems', payload)
+        .post(`http://localhost:3000/${payload.path}`, payload.body)
         .then(response => response.json())
         .then(response => {
           // console.log(response)

@@ -108,8 +108,9 @@ export default class AddPoem extends mixins(uxMixin, textMixin) {
 
   submitPoem() {
     this.preparePoem();
+    const path = this.ownPoem ? 'own_poems' : 'poems';
     if (this.$refs.addForm.validate() && this.newPoem.text) {
-      this.$store.dispatch('poems/addPoem', this.newPoem);
+      this.$store.dispatch('poems/addPoem', { path: path, body: this.newPoem });
       this.showMessage(this.snackbarMessage);
       this.clearForm();
     }
