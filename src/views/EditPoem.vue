@@ -108,7 +108,7 @@ export default class EditPoem extends mixins(uxMixin, textMixin) {
   created() {
     this.id = this.$route.params.id;
     this.$store.dispatch('poems/getPoemsData');
-    this.$store.dispatch('poems/getSinglePoem', this.id);
+    this.$store.dispatch('poems/getSinglePoem', `poems/${this.id}`);
   }
 
   updateID() {
