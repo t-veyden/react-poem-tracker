@@ -19,28 +19,17 @@ export interface RootObject {
 export default class textMixin extends Vue {
   noTitle: boolean = false;
 
-  updateTitle(source: string) {
-    if (this.noTitle) {
-      const middle = Math.floor(this[source].text.length / 2);
-      console.log('middle', middle);
-      let firstLine = this[source].text
-        .split('')
-        .splice(0, middle)
-        .join(''); // what if the text is huge? // what if it's tiny?
-      console.log('before replace', firstLine);
-      firstLine = firstLine.replace(/(<([^>]+)>)/ig, '');
-      console.log('after replace', firstLine);
-      firstLine =
-        firstLine
-          .split('')
-          .splice(0, 20)
-          .join('') + '...';
-      console.log('final title', firstLine);
-
-      this[source].title = firstLine;
+  updateTitle(source: string):void {
+    const match = this[source].text.match(/^.*?(?=(<\w+>))/);
+    if(match === null) {
+      this[source].title = this[source].text;
+    } else if(!match[0]) {
+      // if there are chars before any tags
+      const newMatch = this[source].text.match(/<(\w+)\b[^>]*>.*?<\/\1>/);
+      const str = newMatch[0].replace(/<[^>]+>/g, '');
+      this[source].title = str;
     } else {
-      this[source].title = '';
+      this[source].title = match[0];
     }
   }
-
 };

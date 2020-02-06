@@ -6,7 +6,7 @@
       <v-checkbox
         v-model="noTitle"
         label="No title here"
-        @change="updateTitle('newPoem')"
+        @change="handleChange"
       />
       <v-text-field
         v-model="newPoem.author.name"
@@ -94,6 +94,14 @@ export default class AddPoem extends mixins(uxMixin, textMixin) {
       this.ownPoem
         ? (this.newPoem.author[prop] = this.stubAuthor[prop])
         : (this.newPoem.author[prop] = '');
+    }
+  }
+
+  handleChange() {
+    if(this.noTitle) {
+      this.updateTitle('newPoem')
+    } else {
+      this.newPoem.title = '';
     }
   }
 
