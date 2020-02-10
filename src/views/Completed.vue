@@ -4,12 +4,7 @@
 
     <t-search @search="findPoem($event)" />
 
-    <ul>
-      <li class="purgatory__item" v-for="poem in filteredPoems" :key="poem.id">
-        <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
-        <span>&nbsp;by {{ poem.author.name }}</span>
-      </li>
-    </ul>
+    <t-list :poems="filteredPoems" />
   </div>
 </template>
 
@@ -20,11 +15,13 @@ import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 import { searchMixin } from '../utils';
 import TSearch from '../components/Search.vue';
+import TList from '../components/List.vue';
 
 @Component({
   name: 'Completed',
   components: {
-    TSearch
+    TSearch,
+    TList
   }
 })
 export default class Completed extends mixins(searchMixin) {

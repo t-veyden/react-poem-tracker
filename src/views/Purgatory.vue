@@ -21,24 +21,7 @@
     </v-btn>
     <v-btn text v-show="luckyEnabled" @click="showAll">full list, please</v-btn>
     <hr /> -->
-
-    <ul class="list">
-      <li
-        class="list__item list-item"
-        v-for="poem in randomPoems || filteredPoems"
-        :key="poem.id"
-      >
-        <router-link class="list-item__link" :to="`/poem/${poem.id}`">{{
-          poem.title
-        }}</router-link>
-        <div class="list-item__author">
-          _by_
-          <router-link :to="`/authors/${poem.author.id}`">{{
-            poem.author.name
-          }}</router-link>
-        </div>
-      </li>
-    </ul>
+    <t-list :poems="randomPoems || filteredPoems" />
   </div>
 </template>
 
@@ -49,11 +32,13 @@ import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 import { searchMixin } from '../utils';
 import TSearch from '../components/Search.vue';
+import TList from '../components/List.vue';
 
 @Component({
   name: 'Purgatory',
   components: {
-    TSearch
+    TSearch,
+    TList
   }
 })
 export default class Purgatory extends mixins(searchMixin) {
@@ -86,35 +71,6 @@ export default class Purgatory extends mixins(searchMixin) {
 </script>
 
 <style lang="scss" scoped>
-.list {
-  padding: 0;
-  list-style: none;
-  text-align: center;
-
-  &__item {
-    padding: 10px;
-
-    // &:nth-child(odd) {
-    //   background-color: #ededed;
-    // }
-  }
-}
-
-.list-item {
-  display: flex;
-  position: relative;
-
-  &::before {
-    content: "..";
-    position: absolute;
-    top: -8px;
-    left: 4px;
-    width: 20px;
-    height: 20px;
-    color: #000;
-  }
-}
-
 .page-title {
   text-align: center;
   position: absolute;
