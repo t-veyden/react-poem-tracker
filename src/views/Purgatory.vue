@@ -1,11 +1,10 @@
 <template>
   <div class="purgatory">
-    <h1>Welcome to Purgatory</h1>
+    <h1 class="page-title">welcome to purgatory</h1>
 
     <t-search @search="findPoem($event)" />
-    <hr />
 
-    <div class="filter">
+    <!-- <div class="filter">
       <p>with a flavour:</p>
       <ul>
         <li v-for="filter in filters" :key="filter.id">
@@ -14,23 +13,30 @@
         </li>
       </ul>
     </div>
-    <hr />
+    <hr /> -->
 
-    <v-btn text @click="getRandomPoem"
+    <!-- <v-btn text @click="getRandomPoem"
       >I feel lucky
       <v-icon right>mdi-dice-3</v-icon>
     </v-btn>
     <v-btn text v-show="luckyEnabled" @click="showAll">full list, please</v-btn>
-    <hr />
+    <hr /> -->
 
-    <ul>
+    <ul class="list">
       <li
-        class="purgatory__item"
+        class="list__item list-item"
         v-for="poem in randomPoems || filteredPoems"
         :key="poem.id"
       >
-        <router-link :to="`/poem/${poem.id}`">{{ poem.title }}</router-link>
-        <span>&nbsp;by {{ poem.author.name }}</span>
+        <router-link class="list-item__link" :to="`/poem/${poem.id}`">{{
+          poem.title
+        }}</router-link>
+        <div class="list-item__author">
+          _by_
+          <router-link :to="`/authors/${poem.author.id}`">{{
+            poem.author.name
+          }}</router-link>
+        </div>
       </li>
     </ul>
   </div>
@@ -80,11 +86,42 @@ export default class Purgatory extends mixins(searchMixin) {
 </script>
 
 <style lang="scss" scoped>
-.purgatory__item {
-  padding: 10px;
+.list {
+  padding: 0;
+  list-style: none;
+  text-align: center;
 
-  &:nth-child(odd) {
-    background-color: #ededed;
+  &__item {
+    padding: 10px;
+
+    // &:nth-child(odd) {
+    //   background-color: #ededed;
+    // }
   }
+}
+
+.list-item {
+  display: flex;
+  position: relative;
+
+  &::before {
+    content: "..";
+    position: absolute;
+    top: -8px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    color: #000;
+  }
+}
+
+.page-title {
+  text-align: center;
+  position: absolute;
+  opacity: 0.1;
+  font-size: 60px;
+  line-height: 0.5;
+  right: 15px;
+  text-align: right;
 }
 </style>
