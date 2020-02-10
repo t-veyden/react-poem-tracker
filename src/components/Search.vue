@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="search">
     <input
+      class="search__field"
       type="search"
-      placeholder="find your beauty"
+      placeholder="find ye beauty"
       v-model="search.query"
     />
     <v-radio-group v-model="search.by" row>
@@ -38,3 +39,16 @@ export default class Search extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.search {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  &__field {
+    z-index: 1;
+    flex-grow: 1;
+  }
+}
+</style>
