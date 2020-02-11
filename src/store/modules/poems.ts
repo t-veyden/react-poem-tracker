@@ -150,7 +150,7 @@ const poems = {
         })
         .then(response => {
           console.log('PATCH');
-          dispatch('getSinglePoem', payload.id);
+          dispatch('getSinglePoem', `poems/${payload.id}`);
         });
     },
 

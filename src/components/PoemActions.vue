@@ -1,24 +1,37 @@
 <template>
   <v-card-actions>
-    <div>
-      <v-btn v-if="q !== null" @click="toggleQ">
-        <span v-if="!q">queue</span>
-        <span v-else>UNqueue</span>
+    <v-speed-dial
+      v-model="fab"
+      absolute
+      bottom
+      right
+      direction="left"
+      transition="slide-y-reverse-transition"
+    >
+      <template v-slot:activator>
+        <v-btn v-model="fab" color="rgb(232, 181, 37)" fab>
+          <v-icon v-if="fab" color="#fafafa">mdi-close</v-icon>
+          <v-icon v-else color="#fafafa">touch_app</v-icon>
+        </v-btn>
+      </template>
+      <v-btn fab dark small color="#a5c882" @click="toggleCompletion">
+        <v-icon v-if="!c">done</v-icon>
+        <!-- <v-icon v-else>not_interested</v-icon> -->
+        <!-- <v-icon v-else>remove</v-icon> -->
+        <v-icon v-else>undo</v-icon>
       </v-btn>
-      <v-btn @click="toggleCompletion">
-        <span v-if="!c">complete it</span>
-        <span v-else>UNcomplete</span>
+      <v-btn fab dark small color="#5ab1bb" v-if="q !== null" @click="toggleQ">
+        <v-icon v-if="!q">watch_later</v-icon>
+        <!-- <v-icon v-else>restore</v-icon> -->
+        <v-icon v-else>link_off</v-icon>
       </v-btn>
-    </div>
-
-    <div>
-      <v-btn @click="callConfirm">
-        Delete
+      <v-btn fab dark small color="#c17c74" @click="redirectToEdit">
+        <v-icon>mdi-pencil</v-icon>
       </v-btn>
-      <v-btn @click="redirectToEdit">
-        Edit
+      <v-btn fab dark small color="#832232" @click="callConfirm">
+        <v-icon>mdi-delete</v-icon>
       </v-btn>
-    </div>
+    </v-speed-dial>
   </v-card-actions>
 </template>
 
@@ -41,6 +54,7 @@ export default class PoemActions extends mixins(uxMixin) {
   @Prop() q!: boolean | null;
   @Prop(Boolean) c!: boolean;
 
+  fab = true;
   snackbarMessage: string = 'Tis gone';
   stubAuthor: SingleAuthor = {
     name: 'me',
