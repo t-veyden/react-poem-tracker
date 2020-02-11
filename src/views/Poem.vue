@@ -46,8 +46,11 @@ export default class Poem extends Vue {
 
 <style lang="scss" scoped>
 .poem-view {
+  display: flex;
+  flex-direction: column;
+
   &__poem {
-    padding-top: 60px;
+    margin-top: 60px;
   }
 }
 </style>
