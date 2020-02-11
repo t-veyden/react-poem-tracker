@@ -1,45 +1,65 @@
 <template>
   <div class="add-poem">
     <t-header title="here we meet again" />
-    <v-form ref="addForm" lazy-validation>
-      <v-text-field v-model="newPoem.title" label="Title" :rules="rules" />
-      <v-checkbox
-        v-model="noTitle"
-        label="No title here"
-        @change="handleChange"
-      />
-      <v-text-field
-        v-model="newPoem.author.name"
-        @blur="updateID"
-        label="Author"
-        :rules="rules"
-      />
-      <v-checkbox
-        v-if="isAuthorized"
-        v-model="ownPoem"
-        label="That would be me"
-        @change="setAuthor"
-      />
+    <v-form class="add-poem__form form" ref="addForm" lazy-validation>
+      <div class="form__field-group">
+        <v-text-field
+          class="form__input-field"
+          v-model="newPoem.title"
+          label="Title"
+          :rules="rules"
+        />
+        <v-checkbox
+          class="form__check-field"
+          v-model="noTitle"
+          label="No title here"
+          @change="handleChange"
+        />
+      </div>
+      <div class="form__field-group">
+        <v-text-field
+          class="form__input-field"
+          v-model="newPoem.author.name"
+          @blur="updateID"
+          label="Author"
+          :rules="rules"
+        />
+        <v-checkbox
+          class="form__check-field"
+          v-if="isAuthorized"
+          v-model="ownPoem"
+          label="That would be me"
+          @change="setAuthor"
+        />
+      </div>
 
-      <v-autocomplete
-        :items="langs"
-        label="Language"
-        v-model="newPoem.lang"
-        dense
-        hide-selected
-      />
-      <v-autocomplete
-        :items="completionStates"
-        label="Status"
-        v-model="status"
-        dense
-        hide-selected
-      />
+      <div class="form__options">
+        <v-autocomplete
+          class="form__option-field"
+          :items="langs"
+          label="Language"
+          v-model="newPoem.lang"
+          dense
+          hide-selected
+        />
+        <v-autocomplete
+          class="form__option-field"
+          v-if="!ownPoem"
+          :items="completionStates"
+          label="Status"
+          v-model="status"
+          dense
+          hide-selected
+        />
+      </div>
+
       <!-- but if i want to add another one? -->
 
       <wysiwyg v-model="newPoem.text" />
-      <v-btn text @click="submitPoem">Add poem</v-btn>
-      <v-btn text @click="clearForm">Clear</v-btn>
+      <div class="add-poem__actions">
+        <v-btn text @click="clearForm">Clear</v-btn>
+        <v-btn text @click="submitPoem">Add poem</v-btn>
+      </div>
     </v-form>
     <!--  preview?  -->
   </div>
@@ -146,6 +166,43 @@ export default class AddPoem extends mixins(uxMixin, textMixin) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import '~vue-wysiwyg/dist/vueWysiwyg.css';
+
+.add-poem {
+  display: flex;
+  flex-direction: column;
+
+  &__form {
+    margin-top: 60px;
+  }
+
+  &__actions {
+    margin-top: 20px;
+    float: right;
+  }
+}
+
+.form {
+  &__field-group {
+    display: flex;
+  }
+
+  &__input-field {
+    margin-right: 25px;
+  }
+
+  &__check-field {
+    width: 160px;
+    transform: translateY(12px);
+  }
+
+  &__options {
+    margin: 35px 0;
+  }
+
+  &__option-field {
+    margin-bottom: 15px;
+  }
+}
 </style>
