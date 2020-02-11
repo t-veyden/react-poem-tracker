@@ -1,6 +1,6 @@
 <template>
   <div class="purgatory">
-    <h1 class="page-title">welcome to purgatory</h1>
+    <t-header title="welcome to purgatory" />
 
     <t-search @search="findPoem($event)" />
 
@@ -31,12 +31,14 @@ import { Vue, Component } from 'vue-property-decorator';
 import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 import { searchMixin } from '../utils';
+import THeader from '../components/Header.vue';
 import TSearch from '../components/Search.vue';
 import TList from '../components/List.vue';
 
 @Component({
   name: 'Purgatory',
   components: {
+    THeader,
     TSearch,
     TList
   }
@@ -70,14 +72,4 @@ export default class Purgatory extends mixins(searchMixin) {
 }
 </script>
 
-<style lang="scss" scoped>
-.page-title {
-  text-align: center;
-  position: absolute;
-  opacity: 0.1;
-  font-size: 60px;
-  line-height: 0.5;
-  right: 15px;
-  text-align: right;
-}
-</style>
+<style lang="scss" scoped></style>

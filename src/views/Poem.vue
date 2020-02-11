@@ -1,7 +1,7 @@
 <template>
   <div class="poem-view">
-    <h1>This is a single poem page</h1>
-    <t-poem :poemData="poem" />
+    <t-header :title="poem.title" />
+    <t-poem class="poem-view__poem" :poemData="poem" />
     <t-actions
       v-if="poem.author"
       :id="id"
@@ -16,12 +16,14 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
+import THeader from '../components/Header.vue';
 import TPoem from '../components/Poem.vue';
 import TActions from '../components/PoemActions.vue';
 
 @Component({
   name: 'Poem',
   components: {
+    THeader,
     TPoem,
     TActions
   },
@@ -41,3 +43,11 @@ export default class Poem extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.poem-view {
+  &__poem {
+    padding-top: 60px;
+  }
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="add-poem">
-    <h1>I heard you'd like to add another one</h1>
+    <t-header title="here we meet again" />
     <v-form ref="addForm" lazy-validation>
       <v-text-field v-model="newPoem.title" label="Title" :rules="rules" />
       <v-checkbox
@@ -52,9 +52,13 @@ import MapVuex from '../customDecorators';
 import { mapGetters, mapState } from 'vuex';
 import { uxMixin, textMixin } from '../utils';
 import { defineID } from '../utils/helpers';
+import THeader from '../components/Header.vue';
 
 @Component({
   name: 'AddPoem',
+  components: {
+    THeader
+  },
   computed: mapState('admin', ['isAuthorized'])
 })
 export default class AddPoem extends mixins(uxMixin, textMixin) {
@@ -98,8 +102,8 @@ export default class AddPoem extends mixins(uxMixin, textMixin) {
   }
 
   handleChange() {
-    if(this.noTitle) {
-      this.updateTitle('newPoem')
+    if (this.noTitle) {
+      this.updateTitle('newPoem');
     } else {
       this.newPoem.title = '';
     }

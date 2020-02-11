@@ -1,6 +1,6 @@
 <template>
   <div class="completed">
-    <h1>Well done, here are your Completed</h1>
+    <t-header title="well done, your highness" />
 
     <t-search @search="findPoem($event)" />
 
@@ -14,12 +14,14 @@ import { mixins } from 'vue-class-component';
 import MapVuex from '../customDecorators';
 import { mapGetters } from 'vuex';
 import { searchMixin } from '../utils';
+import THeader from '../components/Header.vue';
 import TSearch from '../components/Search.vue';
 import TList from '../components/List.vue';
 
 @Component({
   name: 'Completed',
   components: {
+    THeader,
     TSearch,
     TList
   }

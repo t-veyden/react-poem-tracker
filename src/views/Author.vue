@@ -1,6 +1,6 @@
 <template>
   <div v-if="currentAuthor">
-    <h1>{{ currentAuthor.name }}</h1>
+    <t-header :title="currentAuthor.name" />
     <p>{{ poemCounter }} in total</p>
     <ul>
       <li v-for="poem in authorsWorks" :key="poem.id">
@@ -21,6 +21,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import MapVuex from '../customDecorators';
 import { mapState, mapGetters } from 'vuex';
+import THeader from '../components/Header.vue';
 
 interface SingleAuthor {
   id: string;
@@ -33,6 +34,9 @@ interface SinglePoem {
 
 @Component({
   name: 'Author',
+  components: {
+    THeader
+  },
   computed: mapState('poems', ['poems'])
 })
 export default class Author extends Vue {
