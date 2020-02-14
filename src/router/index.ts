@@ -56,9 +56,9 @@ const routes = [
     component: () => import('../views/Dashboard.vue')
   },
   {
-    path: '/signin',
-    name: 'signin',
-    component: () => import('../views/SignIn.vue')
+    path: '/authorization',
+    name: 'authorization',
+    component: () => import('../views/Authorization.vue')
   }
 ]
 
