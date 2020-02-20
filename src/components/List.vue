@@ -33,10 +33,6 @@ export default class List extends Vue {
 
   &__item {
     padding: 10px;
-
-    // &:nth-child(odd) {
-    //   background-color: #ededed;
-    // }
   }
 }
 
@@ -44,14 +40,20 @@ export default class List extends Vue {
   display: flex;
   position: relative;
 
+  &__link {
+    position: relative;
+    text-decoration: none;
+  }
+
   &::before {
-    content: '..';
+    content: '';
     position: absolute;
-    top: -8px;
-    left: 4px;
-    width: 20px;
+    top: 10px;
+    left: 10px;
+    width: 10px;
     height: 20px;
-    color: #000;
+    background-color: #fac227;
+    transform: rotate(45deg);
   }
 }
 </style>
