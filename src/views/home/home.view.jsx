@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 import SectionWrapper from "../../components/section-wrapper";
+import BarList from "../../components/bar-list";
+
+import {poems} from '../../temp-data';
 
 import './home.view.scss';
 
@@ -13,10 +16,10 @@ class HomeView extends Component {
           <div>in progress here</div>
         </SectionWrapper>
         <SectionWrapper title="completed" typeOfBar>
-          <div>completed here</div>
+          <BarList poems={poems}/>
         </SectionWrapper>
-        <SectionWrapper title="purgatory" typeOfBar>
-          <div>pending here</div>
+        <SectionWrapper title="pending" typeOfBar>
+          <BarList poems={poems}/>
         </SectionWrapper>
       </div>
     );
