@@ -1,5 +1,7 @@
 // @ts-nocheck
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import {singlePoem} from '../../utils/common-types';
 
 import './list.scss';
@@ -14,9 +16,9 @@ function List({poems}: ListProps) {
       {
         poems.map(poem => (
           <li className="list__item" key={poem.id}>
-            <span>link_here_{poem.title}</span>
+            <Link to={`/poem/${poem.id}`}>{poem.title}</Link>
             <div className="list-item__author">
-              _by_<span> link_here_{poem.author.name}</span>
+              _by_<Link to={`/authors/${poem.author.id}`}> link_here_{poem.author.name}</Link>
             </div>
           </li>
         ))
